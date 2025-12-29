@@ -91,3 +91,17 @@ export const signUp = async (req: Request, res: Response)=>{
         return res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+export const logout = async (req: Request, res: Response)=>{
+    try {
+        res.clearCookie('accessToken-netflix-clone', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            sameSite: 'strict',
+        });
+        return res.status(200).json({ message: 'Logout successful' });
+    } catch (error) {
+        console.error('Error in logout controller:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}
