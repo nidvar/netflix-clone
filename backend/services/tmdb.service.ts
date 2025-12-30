@@ -3,6 +3,7 @@ dotenv.config();
 
 export const fetchData = async (customURL?: string) => {
     let url = customURL || 'https://api.themoviedb.org/3/movie/popular?language=en-US&page=1';
+    console.log(url);
     const options = {
         method: 'GET',
         headers: {
