@@ -4,7 +4,9 @@ dotenv.config();
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import router from "./routes/auth.route.js";
+import authRouter from "./routes/auth.route.js";
+import movieRouter from "./routes/movie.route.js";
+
 import pool from "./db.js";
 
 const app = express();
@@ -40,7 +42,8 @@ app.get("/", async (req, res) => {
 
 // creatTableFunction();
 
-app.use("/api/auth", router);
+app.use("/api/auth", authRouter);
+app.use("/api/movies", movieRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
