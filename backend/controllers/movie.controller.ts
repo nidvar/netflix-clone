@@ -4,8 +4,9 @@ import { fetchData } from '../services/tmdb.service.js';
 
 export const moviesByCategory = async (req: Request, res: Response) => {
     const category = req.params.category;
+    const type = req.params.type;
     try {
-        const data = await fetchData(`https://api.themoviedb.org/3/movie/${category}?language=en-US&page=1`);
+        const data = await fetchData(`https://api.themoviedb.org/3/${type}/${category}?language=en-US&page=1`);
         return res.status(200).send({movies: data});
     } catch (error) {
         console.error('Error in popularMovies controller:', error);
@@ -14,8 +15,9 @@ export const moviesByCategory = async (req: Request, res: Response) => {
 }
 
 export const trendingMovie = async (req: Request, res: Response) => {
+    const type = req.params.type;
     try {
-        const data = await fetchData('https://api.themoviedb.org/3/trending/movie/day?language=en-US');
+        const data = await fetchData(`https://api.themoviedb.org/3/trending/${type}/day?language=en-US`);
         if(data.results && data.results.length > 0){
             const trendingMovie = data.results[0];
             return res.status(200).send({movie: trendingMovie});
@@ -29,8 +31,9 @@ export const trendingMovie = async (req: Request, res: Response) => {
 
 export const movieTrailer = async (req: Request, res: Response) => {
     const movieId = req.params.id;
+    const type = req.params.type;
     try {
-        const data = await fetchData(`https://api.themoviedb.org/3/movie/${movieId}/videos?language=en-US`);
+        const data = await fetchData(`https://api.themoviedb.org/3/${type}/${movieId}/videos?language=en-US`);
         console.log(data);
         return res.status(200).send({trailers: data});
     } catch (error) {
@@ -41,8 +44,9 @@ export const movieTrailer = async (req: Request, res: Response) => {
 
 export const movieDetails = async (req: Request, res: Response) => {
     const movieId = req.params.id;
+    const type = req.params.type;
     try {
-        const data = await fetchData(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US`);
+        const data = await fetchData(`https://api.themoviedb.org/3/${type}/${movieId}?language=en-US`);
         return res.status(200).send({details: data});
     } catch (error) {
         console.error('Error in movieDetails controller:', error);
@@ -52,8 +56,9 @@ export const movieDetails = async (req: Request, res: Response) => {
 
 export const similarMovies = async (req: Request, res: Response) => {
     const movieId = req.params.id;
+    const type = req.params.type;
     try {
-        const data = await fetchData(`https://api.themoviedb.org/3/movie/${movieId}/similar?language=en-US`);
+        const data = await fetchData(`https://api.themoviedb.org/3/${type}/${movieId}/similar?language=en-US`);
         return res.status(200).send({details: data});
     } catch (error) {
         console.error('Error in movieDetails controller:', error);
