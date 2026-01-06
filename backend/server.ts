@@ -11,7 +11,6 @@ import authRouter from "./routes/auth.route.js";
 import movieRouter from "./routes/movie.route.js";
 import searchRouter from "./routes/search.route.js";
 
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -29,21 +28,6 @@ app.get("/", async (req, res) => {
     res.status(500).json({ error: "Database connection failed" });
   }
 });
-
-// const creatTableFunction = async()=>{
-//   const createTable = `
-//     CREATE TABLE IF NOT EXISTS users (
-//         id SERIAL PRIMARY KEY,
-//         email VARCHAR(255) UNIQUE NOT NULL,
-//         password VARCHAR(255) NOT NULL,
-//         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-//       );
-//   `
-//   const result = await pool.query(createTable);
-//   console.log(result.command);
-// };
-
-// creatTableFunction();
 
 app.use("/api/auth", authRouter);
 app.use("/api/movies", protectRoute, movieRouter);
