@@ -1,11 +1,9 @@
 import express from 'express';
 
-import type { Request, Response } from 'express';
+import { searchMovie } from '../controllers/search.controller.js';
 
 const searchRouter = express.Router();
 
-searchRouter.post('/', (req: Request, res: Response)=>{
-    res.send('search routes');
-});
+searchRouter.get('/movies/:query', searchMovie);
 
 export default searchRouter;
