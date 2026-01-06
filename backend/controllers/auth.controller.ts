@@ -43,6 +43,12 @@ export const login = async (req: Request, res: Response)=>{
         };
 
         const accessToken = generateAccessToken({ id: user.id });
+        const refreshToken = generateRefreshToken({ id: user.id });
+
+        await pool.query(
+            'UPDATE users SET refresh_token = $1 WHERE id = $2', 
+            [refreshToken, user.id]
+        );
 
         res.cookie('accessToken-netflix-clone', accessToken, {
             httpOnly: true,

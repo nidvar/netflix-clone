@@ -14,6 +14,11 @@ export const protectRoute = (req: Request, res: Response, next: NextFunction) =>
         console.log('protect route passed')
         next();
     } catch (error) {
-        return res.status(500).send('Internal Server Error in Protect Route Middleware');
+        if(error instanceof Error){
+            if(error.name === 'TokenExpiredError'){
+                return res.status(500).send({message: 'token expired'});
+            }
+        };
+        return res.status(500).send({message: 'Unknown Error'});
     }
 }
