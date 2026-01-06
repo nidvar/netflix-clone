@@ -4,11 +4,13 @@ dotenv.config();
 import express from "express";
 import cookieParser from "cookie-parser";
 
-import authRouter from "./routes/auth.route.js";
-import movieRouter from "./routes/movie.route.js";
-
 import pool from "./db.js";
 import { protectRoute } from "./middleware/protectRoute.js";
+
+import authRouter from "./routes/auth.route.js";
+import movieRouter from "./routes/movie.route.js";
+import searchRouter from "./routes/search.route.js";
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -45,6 +47,7 @@ app.get("/", async (req, res) => {
 
 app.use("/api/auth", authRouter);
 app.use("/api/movies", protectRoute, movieRouter);
+app.use("/api/search", protectRoute, searchRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
