@@ -83,3 +83,28 @@ export const getSearchHistory = async (req: Request, res: Response)=>{
         return res.status(401).json({message: 'getSearchHistory error'});
     }
 }
+
+export const clearHistory = async (req: Request, res: Response)=>{
+    try {
+        const result = await pool.query(
+            'DELETE FROM history WHERE user_id = $1',
+            [res.locals.userId]
+        );
+        return res.status(200).json({message: 'history cleared'});
+    } catch (error) {
+        return res.status(401).json({message: 'clearHistory error'});
+    }
+}
+
+export const removeFromHistory = async (req: Request, res: Response)=>{
+    try {
+        const id = req.body.id;
+        await pool.query(
+            'DELETE FROM history WHERE id = $1 AND user_id = $2',
+            [id, res.locals.userId]
+        );
+        return res.status(200).json({message: 'removed from history'});
+    } catch (error) {
+        return res.status(401).json({message: 'removeFromHistory error'});
+    }
+}
