@@ -70,4 +70,16 @@ export const searchTVShow = async (req: Request, res: Response)=>{
         console.log(error);
         return res.status(401).json({message: 'search movie error'});
     }
+};
+
+export const getSearchHistory = async (req: Request, res: Response)=>{
+    try {
+        const data = await pool.query(
+            'SELECT * FROM history WHERE user_id = $1',
+            [res.locals.userId]
+        );
+        return res.status(200).json({history: data.rows});
+    } catch (error) {
+        return res.status(401).json({message: 'getSearchHistory error'});
+    }
 }
