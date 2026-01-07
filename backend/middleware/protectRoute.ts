@@ -3,7 +3,7 @@ import jwt, { type JwtPayload } from 'jsonwebtoken';
 
 export const protectRoute = (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.cookies['accessToken-netflix-clone'];
+        const token = req.cookies['accessToken-nf-clone'];
         if (!token) {
             return res.status(401).send('Unauthorized: No token provided');
         };
@@ -17,7 +17,7 @@ export const protectRoute = (req: Request, res: Response, next: NextFunction) =>
     } catch (error) {
         if(error instanceof Error){
             if(error.name === 'TokenExpiredError'){
-                return res.status(500).send({message: 'token expired'});
+                return res.status(401).send({message: 'token expired'});
             }
         };
         return res.status(500).send({message: 'Unknown Error'});

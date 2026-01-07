@@ -2,6 +2,8 @@ import bcrypt from 'bcryptjs';
 
 import type { Request, Response } from 'express';
 
+import jwt, { type JwtPayload } from 'jsonwebtoken';
+
 import pool from '../db.js';
 import { generateAccessToken, generateRefreshToken } from '../utils/generateToken.js';
 
@@ -50,11 +52,18 @@ export const login = async (req: Request, res: Response)=>{
             [refreshToken, user.id]
         );
 
-        res.cookie('accessToken-netflix-clone', accessToken, {
+        res.cookie('accessToken-nf-clone', accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
             sameSite: 'strict',
             maxAge: 15 * 60 * 1000,
+        });
+
+        res.cookie('refreshToken-nf-clone', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            sameSite: 'strict',
+            maxAge: 3* 60 * 60 * 1000,
         });
 
         return res.status(200).json({ message: 'Login successful' });
@@ -100,14 +109,63 @@ export const signUp = async (req: Request, res: Response)=>{
 
 export const logout = async (req: Request, res: Response)=>{
     try {
-        res.clearCookie('accessToken-netflix-clone', {
+        res.clearCookie('accessToken-nf-clone', {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
             sameSite: 'strict',
         });
+
+        res.clearCookie('refreshToken-nf-clone', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            sameSite: 'strict',
+        });
+
+        await pool.query(
+            'UPDATE users SET refresh_token = NULL WHERE id = $1', 
+            [res.locals.userId]
+        );
         return res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
         console.error('Error in logout controller:', error);
         return res.status(500).json({ message: 'Internal server error' });
     }
 }
+
+export const refreshTokenEndpoint = async (req: Request, res: Response) => {
+    try {
+        const refreshToken = req.cookies['refreshToken-nf-clone'];
+        if(!refreshToken){
+            return res.status(401).json({message: 'Unauthorized: No refresh token provided'});
+        };
+        const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET as string) as JwtPayload;
+        if(!decodedRefreshToken){
+            return res.status(401).json({message: 'Unauthorized: Invalid refresh token'});
+        };
+        const user = await pool.query(
+            'SELECT * FROM users WHERE id = $1',
+            [decodedRefreshToken.id]
+        );
+
+        if(!user){
+            return res.status(401).json({message: 'Unauthorized: Invalid refresh token'});
+        }
+
+        const newAccessToken = generateAccessToken({ id: decodedRefreshToken.id });
+
+        res.cookie('accessToken-nf-clone', newAccessToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV !== 'development',
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000,
+        });
+
+        return res.status(200).json({message: 'access token refreshed'});
+
+    } catch (error) {
+        if(error instanceof Error){
+            console.log(error.name)
+        };
+        return res.status(401).json({message: 'refreshToken error'});
+    }
+};
