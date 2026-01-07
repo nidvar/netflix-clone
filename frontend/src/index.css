@@ -2,17 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
+.main {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .hero-bg {
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url("/hero.png");
 }
 
-.my-button {
+/* sign up section */
+
+.sign-up-container {
     display: flex;
-    background-color: wheat;
-    border: 1px solid black;
-    padding: 5px;
-    margin: 10px;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+    max-width: 400px;
+    width: 400px;
+    padding: 30px 25px;
+    gap: 10px;
+    color: white;
+    margin: 15px;
 }
+
+.sign-up-container .title{
+    font-size: 22px;
+    font-weight: bolder;
+}
+
+.sign-up-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.my-input{
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 6px;
+    padding: 4px 4px;
+    background-color: black;
+}
+
+.sign-up-form .my-button {
+    width: 100%;
+    text-align: center;
+    text-align: center;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px;
+    margin: 5px 0;
+}
+
+.sign-in-option {
+    margin: 6px;
+    text-align: center;
+}
+
+.sign-in-link {
+    color: red;
+}
+
+
+/* UTILS */
