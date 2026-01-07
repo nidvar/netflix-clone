@@ -156,7 +156,7 @@ export const refreshTokenEndpoint = async (req: Request, res: Response) => {
         res.cookie('accessToken-nf-clone', newAccessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
-            sameSite: 'strict',
+            sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
             maxAge: 15 * 60 * 1000,
         });
 

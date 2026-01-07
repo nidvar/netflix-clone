@@ -1,54 +1,18 @@
-import { useState } from 'react'
+import HomePage from './pages/HomePage'
+import { Route, Routes } from 'react-router-dom'
+import LoginPage from './pages/LoginPage'
+import SignUpPage from './pages/SignUpPage'
+
 function App() {
-  const [count, setCount] = useState(0);
-
-  const login = async ()=>{
-    console.log('logging in');
-    const payload = {
-      method: 'POST',
-      credentials: "include" as RequestCredentials,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: 'bob@mail.com',
-        password: 'bob123'
-      })
-    }
-    const response = await fetch('http://localhost:3001/api/auth/login', payload);
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  }
-
-  const logout = async ()=>{
-    console.log('logging out');
-    const payload = {
-      method: 'POST',
-      credentials: "include" as RequestCredentials
-    }
-    const response = await fetch('http://localhost:3001/api/auth/logout', payload);
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  };
-
-  const grabMovies = async ()=>{
-    console.log('grabbing movies');
-    const response = await fetch('http://localhost:3001/api/movies/movie/trending', {credentials: "include" as RequestCredentials});
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  };
-
-  return (
-    <>
-      <h1>NETFLIX CLONE</h1>
-      <button onClick={function(){login()}}>BOB LOGIN</button>
-      <button onClick={function(){logout()}}>LOGOUT</button>
-      <button onClick={function(){grabMovies()}}>GRAB MOVIES</button>
-    </>
-  )
+    return (
+        <>
+            <Routes>
+                <Route path='/' element={<HomePage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/signup' element={<SignUpPage />} />
+            </Routes>
+        </>
+    )
 }
 
 export default App
