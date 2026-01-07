@@ -55,14 +55,14 @@ export const login = async (req: Request, res: Response)=>{
         res.cookie('accessToken-nf-clone', accessToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
-            sameSite: 'strict',
+            sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
             maxAge: 15 * 60 * 1000,
         });
 
         res.cookie('refreshToken-nf-clone', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
-            sameSite: 'strict',
+            sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
             maxAge: 3* 60 * 60 * 1000,
         });
 

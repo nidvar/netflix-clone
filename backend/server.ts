@@ -3,6 +3,7 @@ dotenv.config();
 
 import express from "express";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import pool from "./db.js";
 import { protectRoute } from "./middleware/protectRoute.js";
@@ -13,6 +14,14 @@ import searchRouter from "./routes/search.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // frontend URL
+    credentials: true,               // REQUIRED for cookies
+  })
+);
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
