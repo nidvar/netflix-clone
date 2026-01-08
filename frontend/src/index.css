@@ -2,11 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
 .main {
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
 .hero-bg {
@@ -17,6 +27,8 @@
 
 .header {
     width: 100%;
+    z-index: 99999;
+    position: absolute;
 }
 
 .inner-header {
