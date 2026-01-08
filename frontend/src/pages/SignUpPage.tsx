@@ -40,6 +40,11 @@ function SignUpPage() {
 
   return (
     <div className="hero-bg h-screen">
+      <div className="header">
+        <div className="inner-header">
+          <img className="logo" src="/netflix-logo.png" alt="logo" />
+        </div>
+      </div>
       <div className="main">
         <div className="sign-up-container">
           <h1 className="title">Sign Up</h1>

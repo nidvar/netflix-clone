@@ -13,6 +13,23 @@
     background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url("/hero.png");
 }
 
+/* header */
+
+.header {
+    width: 100%;
+}
+
+.inner-header {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    padding: 15px;
+}
+
+.inner-header img {
+    max-height: 50px;
+}
+
 /* sign up section */
 
 .sign-up-container {
