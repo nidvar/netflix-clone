@@ -6,8 +6,8 @@ function AuthScreen() {
       <div className="header">
         <div className="inner-header">
           <img className="logo" src="/netflix-logo.png" alt="logo" />
-          <div className="white">
-            <Link to="/login">Sign In</Link>
+          <div className="sign-in-nav-link-container">
+            <Link to="/login" className="sign-in-nav-link">Sign In</Link>
           </div>
         </div>
       </div>

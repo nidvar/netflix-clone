@@ -58,6 +58,19 @@ html, body {
     max-height: 50px;
 }
 
+.sign-in-nav-link-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sign-in-nav-link {
+    color: white;
+    background-color: red;
+    padding: 4px 6px;
+    border-radius: 4px;
+}
+
 /* sign up section */
 
 .sign-up-container {
