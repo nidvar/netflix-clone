@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+
+button {
+    background-color: pink;
+    margin: 10px;
+}
+
+.white {
+    background-color: white;
+}
+
+.temp-con {
+    background-color: lightgoldenrodyellow;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -32,6 +46,8 @@ html, body {
 }
 
 .inner-header {
+    display: flex;
+    justify-content: space-between;
     max-width: 1200px;
     width: 100%;
     margin: auto;

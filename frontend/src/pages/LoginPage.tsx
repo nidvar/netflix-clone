@@ -13,6 +13,28 @@ function LoginPage() {
     setPassword(value);
   };
 
+  const login = async () => {
+    console.log("logging in");
+    const payload = {
+      method: "POST",
+      credentials: "include" as RequestCredentials,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password
+      }),
+    };
+    const response = await fetch(
+      "http://localhost:3001/api/auth/login",
+      payload
+    );
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
     console.log(email, password);
@@ -21,6 +43,8 @@ function LoginPage() {
       console.log('fields must not be empty');
       return;
     };
+
+    login();
   }
 
   return (
