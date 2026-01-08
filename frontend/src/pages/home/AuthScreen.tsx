@@ -26,6 +26,30 @@ function AuthScreen() {
           <button className="get-started">Get Started <ChevronRight className="chevron-right"/></button>
         </form>
       </div>
+
+      <div className="seperator"></div>
+
+      <div className="section">
+        <div className="one">
+          <h1 className="section-title">Enjoy on your TV</h1>
+          <p>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
+        </div>
+        <div className="two">
+          <img src="/tv.png" className="tv-image"/>
+          <video
+            className="hero-vid"
+            playsInline
+            autoPlay={true}
+            muted
+            loop
+          >
+            <source src="/hero-vid.m4v" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <div className="seperator"></div>
+
     </div>
   )
 }
