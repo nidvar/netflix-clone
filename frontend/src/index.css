@@ -28,6 +28,7 @@ html, body {
 
 .main {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -69,6 +70,45 @@ html, body {
     background-color: red;
     padding: 4px 6px;
     border-radius: 4px;
+}
+
+/* AUTH PAGE */
+
+.auth-hero {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.title-auth {
+    font-size: 42px;
+    font-weight: bolder;
+}
+
+.auth-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.auth-input {
+    padding: 6px;
+    background-color: rgba(0,0,0,0.7);
+    border-radius: 3px;
+    border: 1px solid grey;
+    width: 300px;
+}
+
+.get-started {
+    display: flex;
+    padding: 7px 12px;
+    border-radius: 4px;
+    background-color: red;
 }
 
 /* sign up section */
@@ -129,3 +169,25 @@ html, body {
 
 
 /* UTILS */
+
+@media only screen and (max-width: 600px) {
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .get-started, .auth-input {
+    width: 100%;
+  }
+  
+  .get-started {
+    display: flex;
+    justify-content: center;
+  }
+
+}

@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { ChevronRight } from 'lucide-react';
 
 function AuthScreen() {
   return (
@@ -11,10 +12,19 @@ function AuthScreen() {
           </div>
         </div>
       </div>
-      <div className="main">
-        <div className="sign-up-container">
-          <h1 className="title">AUTH PAGE</h1>
-        </div>
+      <div className="main auth-hero">
+        <h1 className="title-auth">Unlimited movies, TV shows, and more.</h1>
+        <p>Watch anywhere. Cancel anytime.</p>
+        <p>Ready to watch? Enter your email to create or restart your membership.</p>
+        <form className="auth-form">
+          <input 
+            className="auth-input"
+            type="email"
+            placeholder="Email address"
+            onChange={function(){}}
+          />
+          <button className="get-started">Get Started <ChevronRight className="chevron-right"/></button>
+        </form>
       </div>
     </div>
   )
