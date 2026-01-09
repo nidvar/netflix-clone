@@ -49,7 +49,7 @@ function LoginPage() {
   }
 
   return (
-    <div className="hero-bg h-screen">
+    <div className="hero-bg">
       <div className="header">
         <div className="inner-header">
           <Link to="/" ><img className="logo" src="/netflix-logo.png" alt="logo" /></Link>

@@ -12,7 +12,7 @@ function AuthScreen() {
           </div>
         </div>
       </div>
-      <div className="main auth-hero">
+      <div className="main auth-main auth-hero">
         <h1 className="title-auth">Unlimited movies, TV shows, and more.</h1>
         <p>Watch anywhere. Cancel anytime.</p>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>
