@@ -6,14 +6,6 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  };
-
-  const handlePassword = (value: string) => {
-    setPassword(value);
-  };
-
   const login = async () => {
     console.log("logging in");
     const payload = {
@@ -66,7 +58,7 @@ function LoginPage() {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={function(e){handleEmail(e.target.value)}}
+              onChange={(e)=>{setEmail(e.target.value)}}
             />
             <label htmlFor="password" className="my-label">Password</label>
             <input
@@ -75,7 +67,7 @@ function LoginPage() {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={function(e){handlePassword(e.target.value)}}
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <button className="my-button" type="submit">Sign In</button>
           </form>

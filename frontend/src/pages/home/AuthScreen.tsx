@@ -1,7 +1,20 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ChevronRight } from 'lucide-react';
+import type { FormEvent } from "react";
 
 function AuthScreen() {
+
+  const [email, setEmail] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(email);
+    navigate("/signup?email=" + email)
+  };
+
   return (
     <div className="hero-bg">
       <div className="header">
@@ -16,12 +29,13 @@ function AuthScreen() {
         <h1 className="title-auth">Unlimited movies, TV shows, and more.</h1>
         <p>Watch anywhere. Cancel anytime.</p>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>
-        <form className="auth-form">
+        <form className="auth-form" onSubmit={function(e){handleSubmitForm(e)}}>
           <input 
             className="auth-input"
             type="email"
             placeholder="Email address"
-            onChange={function(){}}
+            value={email}
+            onChange={function(e){setEmail(e.target.value)}}
           />
           <Link to='/login' className="get-started">Get Started <ChevronRight className="chevron-right"/></Link>
         </form>

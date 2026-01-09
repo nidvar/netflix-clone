@@ -1,32 +1,18 @@
-import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useState, type FormEvent, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 function SignUpPage() {
+
+  const location = useLocation();
+  const urlEmail = new URLSearchParams(location.search).get('email');
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const handleUsername = (value: string) => {
-    setUsername(value);
-  };
-
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  };
-
-  const handlePassword = (value: string) => {
-    setPassword(value);
-  };
-
-  const handleConfirmPassword = (value: string) => {
-    setConfirmPassword(value);
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    console.log(username, email, password, confirmPassword);
 
     if(username.trim() === "" || email.trim() === ""){
       console.log('fields must not be empty');
@@ -37,7 +23,14 @@ function SignUpPage() {
       return;
     };
 
-  }
+    console.log(username, email, password, confirmPassword);
+  };
+
+  useEffect(()=>{
+    if(urlEmail !== null){
+      setEmail(urlEmail);
+    }
+  }, [urlEmail]);
 
   return (
     <div className="hero-bg h-screen">
@@ -50,15 +43,6 @@ function SignUpPage() {
         <div className="sign-up-container">
           <h1 className="title">Sign Up</h1>
           <form className="sign-up-form" onSubmit={function(e){handleSubmit(e)}}>
-            <label htmlFor="username" className="my-label">Username</label>
-            <input
-              id="username"
-              className="my-input"
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={function(e){handleUsername(e.target.value)}}
-            />
             <label htmlFor="email" className="my-label">Email</label>
             <input
               id="email"
@@ -66,7 +50,16 @@ function SignUpPage() {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={function(e){handleEmail(e.target.value)}}
+              onChange={(e)=>{setEmail(e.target.value)}}
+            />
+            <label htmlFor="username" className="my-label">Username</label>
+            <input
+              id="username"
+              className="my-input"
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e)=>{setUsername(e.target.value)}}
             />
             <label htmlFor="password" className="my-label">Password</label>
             <input
@@ -75,7 +68,7 @@ function SignUpPage() {
               type="password"
               placeholder="Password"
               value={password}
-              onChange={function(e){handlePassword(e.target.value)}}
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <label htmlFor="confirm-password" className="my-label">Confirm Password</label>
             <input
@@ -84,11 +77,11 @@ function SignUpPage() {
               type="password"
               placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={function(e){handleConfirmPassword(e.target.value)}}
+              onChange={(e)=>{setConfirmPassword(e.target.value)}}
             />
             <button className="my-button" type="submit">Sign Up</button>
           </form>
-          <p className="sign-in-option">Already a member? <a href="/login" className="sign-in-link">Sign In</a></p>
+          <p className="sign-in-option">Already a member? <Link to="/login" className="sign-in-link">Sign In</Link></p>
         </div>
       </div>
     </div>
