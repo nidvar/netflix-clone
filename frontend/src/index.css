@@ -24,6 +24,7 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    box-sizing: border-box;
 }
 
 .main {
@@ -174,7 +175,10 @@ html, body {
 .section {
   display:flex;
   justify-content: center;
+  align-items: center;
   background-color: black;
+  color: white;
+  min-height: 450px;
 }
 
 .section-title {
@@ -182,17 +186,16 @@ html, body {
   font-weight: bolder;
 }
 
-.one {
+.section-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
   height: 400px;
   width: 500px;
-  color: white;
 }
 
-.two {
+.section-image {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -211,6 +214,34 @@ html, body {
   width: 500px;
 }
 
+.downloading-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  gap: 50px;
+  top: 270px;
+
+  background-color: black;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid grey;
+}
+
+.downloading-box-one {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.downloading-box img {
+  height: 70px;
+}
+
+.downloading-details {
+  color: white;
+}
+
 
 /* UTILS */
 
@@ -220,6 +251,24 @@ html, body {
     background-color: rgb(35, 35, 35);
     padding: 0;
     margin: 0;
+}
+
+.blue {
+  color: blue;
+}
+
+.small {
+  font-size: 14px;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.relative {
+  position: relative;
 }
 
 @media only screen and (max-width: 600px) {
@@ -248,19 +297,6 @@ html, body {
     display: flex;
     justify-content: center;
   }
-
-  /* SECTION */
-  .section {
-    display:flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-
-  .one {
-    height: 200px;
-  }
-
 }
 
 
@@ -271,5 +307,10 @@ html, body {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    min-height: 700px;
+  }
+
+  .section-text {
+    height: 200px;
   }
 }

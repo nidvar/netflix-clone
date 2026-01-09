@@ -30,11 +30,11 @@ function AuthScreen() {
       <div className="seperator"></div>
 
       <div className="section">
-        <div className="one">
+        <div className="section-text">
           <h1 className="section-title">Enjoy on your TV</h1>
           <p>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV, Blu-ray players and more.</p>
         </div>
-        <div className="two">
+        <div className="section-image">
           <img src="/tv.png" className="tv-image"/>
           <video
             className="hero-vid"
@@ -50,6 +50,25 @@ function AuthScreen() {
 
       <div className="seperator"></div>
 
+      <div className="section">
+        <div className="section-image center relative">
+          <img src="/stranger-things-lg.png" />
+          <div className="downloading-box">
+            <div className="downloading-box-one">
+              <img src="/stranger-things-sm.png" />
+              <div className="downloading-details">
+                <p>Stranger Things</p>
+                <p className="blue small">Downloading...</p>
+              </div>
+            </div>
+            <div>icon</div>
+          </div>
+        </div>
+        <div className="section-text">
+          <h1 className="section-title">Download your shows to watch offline</h1>
+          <p>Save your favourites easily and always have something to watch.</p>
+        </div>
+      </div>
     </div>
   )
 }
