@@ -216,11 +216,12 @@ html, body {
 .device-pile-image {
   width: 500px;
   position: absolute;
-  top: 115px;
+  top: 80px;
 }
 
 .device-pile-vid {
   height: 180px;
+  margin-bottom: 65px;
 }
 
 .downloading-box {
@@ -342,7 +343,7 @@ html, body {
   }
 
   .device-pile-image {
-    top: 40px;
+    top: 5px;
   }
 
   .device-pile-vid {
