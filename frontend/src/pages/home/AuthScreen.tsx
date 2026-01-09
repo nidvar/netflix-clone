@@ -6,7 +6,7 @@ function AuthScreen() {
     <div className="hero-bg">
       <div className="header">
         <div className="inner-header">
-          <img className="logo" src="/netflix-logo.png" alt="logo" />
+          <Link to="/" ><img className="logo" src="/netflix-logo.png" alt="logo" /></Link>
           <div className="sign-in-nav-link-container">
             <Link to="/login" className="sign-in-nav-link">Sign In</Link>
           </div>
@@ -23,7 +23,7 @@ function AuthScreen() {
             placeholder="Email address"
             onChange={function(){}}
           />
-          <button className="get-started">Get Started <ChevronRight className="chevron-right"/></button>
+          <Link to='/login' className="get-started">Get Started <ChevronRight className="chevron-right"/></Link>
         </form>
       </div>
 

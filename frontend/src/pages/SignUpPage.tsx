@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
 
 function SignUpPage() {
 
@@ -42,7 +43,7 @@ function SignUpPage() {
     <div className="hero-bg h-screen">
       <div className="header">
         <div className="inner-header">
-          <img className="logo" src="/netflix-logo.png" alt="logo" />
+          <Link to="/" ><img className="logo" src="/netflix-logo.png" alt="logo" /></Link>
         </div>
       </div>
       <div className="main">
