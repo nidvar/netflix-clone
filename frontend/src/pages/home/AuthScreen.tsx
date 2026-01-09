@@ -50,9 +50,9 @@ function AuthScreen() {
 
       <div className="seperator"></div>
 
-      <div className="section">
-        <div className="section-image center relative">
-          <img src="/stranger-things-lg.png" />
+      <div className="section reverse-column">
+        <div className="section-image center">
+          <img src="/stranger-things-lg.png" className="stranger-things-lg"/>
           <div className="downloading-box">
             <div className="downloading-box-one">
               <img src="/stranger-things-sm.png" />
@@ -69,6 +69,7 @@ function AuthScreen() {
           <p>Save your favourites easily and always have something to watch.</p>
         </div>
       </div>
+      <div className="seperator"></div>
     </div>
   )
 }

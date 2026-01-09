@@ -176,9 +176,11 @@ html, body {
   display:flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  min-height: 400px;
+  padding: 15px;
   background-color: black;
   color: white;
-  min-height: 450px;
 }
 
 .section-title {
@@ -191,7 +193,6 @@ html, body {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  height: 400px;
   width: 500px;
 }
 
@@ -199,19 +200,17 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 400px;
   width: 500px;
 }
 
 .tv-image {
-  height: 400px;
   width: 500px;
   position: absolute;
+  top: 20px;
 }
 
 .hero-vid {
-  height: 240px;
-  width: 500px;
+  height: 210px;
 }
 
 .downloading-box {
@@ -297,20 +296,50 @@ html, body {
     display: flex;
     justify-content: center;
   }
-}
 
-
-@media only screen and (max-width: 900px) {
-  /* SECTION */
   .section {
     display:flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    min-height: 700px;
+  }
+
+  .section-image {
+    max-width: 350px;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px !important;
   }
 
   .section-text {
-    height: 200px;
+    max-width: 350px;
+    height: 200px !important;
   }
+
+  .section-image {
+    height: auto;
+  }
+
+  .tv-image {
+    width: 500px;
+    position: absolute;
+    top: -10px;
+  }
+
+  .hero-vid {
+    width: 300px;
+    margin-left: 44px;
+  }
+  
+  .downloading-box {
+    top: 160px;
+  }
+
+  /* UTILS */
+
+  .reverse-column {
+    display: flex;
+    flex-direction: column-reverse !important;
+  }
+
 }
