@@ -3,7 +3,7 @@ import { ChevronRight } from 'lucide-react';
 
 function AuthScreen() {
   return (
-    <div className="hero-bg h-screen">
+    <div className="hero-bg">
       <div className="header">
         <div className="inner-header">
           <img className="logo" src="/netflix-logo.png" alt="logo" />
@@ -61,7 +61,7 @@ function AuthScreen() {
                 <p className="blue small">Downloading...</p>
               </div>
             </div>
-            <div>icon</div>
+            <div><img src='/download-icon.gif' alt='' className='h-12' /></div>
           </div>
         </div>
         <div className="section-text">

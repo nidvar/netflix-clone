@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-button {
-    background-color: pink;
-    margin: 10px;
-}
-
-.white {
-    background-color: white;
-}
-
-.temp-con {
-    background-color: lightgoldenrodyellow;
-}
-
 * {
     box-sizing: border-box;
 }
@@ -71,6 +57,23 @@ html, body {
     background-color: red;
     padding: 4px 6px;
     border-radius: 4px;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: black;
+  color: white;
+  font-size: 18px;
+  gap: 10px;
+}
+
+.link-underline {
+  text-decoration: underline;
 }
 
 /* AUTH PAGE */
@@ -362,3 +365,5 @@ html, body {
   }
 
 }
+
+

@@ -11,7 +11,7 @@ function HomePage() {
   const user = false;
 
   return (
-    <div className="hero-bg h-screen">
+    <div className="hero-bg">
       {user? <HomeScreen />: <AuthScreen />}
     </div>
   );
