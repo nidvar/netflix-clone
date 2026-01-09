@@ -70,6 +70,24 @@ function AuthScreen() {
         </div>
       </div>
       <div className="seperator"></div>
+      <div className="section">
+        <div className="section-text">
+          <h1 className="section-title">Watch everywhere</h1>
+          <p>Stream unlimited movies and TV shows on your phone, tablet, laptop, and TV.</p>
+        </div>
+        <div className="section-image">
+          <img src="/device-pile.png" className="device-pile-image"/>
+          <video
+            className="device-pile-vid"
+            playsInline
+            autoPlay={true}
+            muted
+            loop
+          >
+            <source src="/video-devices.m4v" type="video/mp4" />
+          </video>
+        </div>
+      </div>
     </div>
   )
 }

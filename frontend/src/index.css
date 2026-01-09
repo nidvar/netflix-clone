@@ -177,7 +177,7 @@ html, body {
   justify-content: center;
   align-items: center;
   position: relative;
-  min-height: 400px;
+  min-height: 490px;
   padding: 15px;
   background-color: black;
   color: white;
@@ -206,11 +206,21 @@ html, body {
 .tv-image {
   width: 500px;
   position: absolute;
-  top: 20px;
+  top: 70px;
 }
 
 .hero-vid {
   height: 210px;
+}
+
+.device-pile-image {
+  width: 500px;
+  position: absolute;
+  top: 115px;
+}
+
+.device-pile-vid {
+  height: 180px;
 }
 
 .downloading-box {
@@ -219,7 +229,7 @@ html, body {
   align-items: center;
   position: absolute;
   gap: 50px;
-  top: 270px;
+  top: 320px;
 
   background-color: black;
   padding: 8px 12px;
@@ -270,7 +280,7 @@ html, body {
   position: relative;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
 
   /* AUTH SCREEN */
 
@@ -302,12 +312,12 @@ html, body {
     flex-direction: column;
     text-align: center;
     align-items: center;
+    min-height: 560px;
   }
 
   .section-image {
     max-width: 350px;
     position: relative;
-    overflow: hidden;
     min-height: 250px !important;
   }
 
@@ -330,7 +340,15 @@ html, body {
     width: 300px;
     margin-left: 44px;
   }
-  
+
+  .device-pile-image {
+    top: 40px;
+  }
+
+  .device-pile-vid {
+    height: 130px;
+  }
+
   .downloading-box {
     top: 160px;
   }
