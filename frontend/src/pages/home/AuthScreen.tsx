@@ -88,6 +88,21 @@ function AuthScreen() {
           </video>
         </div>
       </div>
+
+      <div className="seperator"></div>
+
+      <div className="section reverse-column">
+        <div className="section-image center">
+          <img src="/kids.png" />
+        </div>
+        <div className="section-text">
+          <h1 className="section-title">Create profiles for kids</h1>
+          <p>Send kids on adventures with their favourite characters in a space made just for them—free with your membership.</p>
+        </div>
+      </div>
+
+      <div className="seperator"></div>
+
     </div>
   )
 }
