@@ -3,66 +3,68 @@
 @tailwind utilities;
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    box-sizing: border-box;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .auth-main {
-    height: 90vh;
-    max-width: 800px;
-    margin: auto;
+  height: 90vh;
+  max-width: 800px;
+  margin: auto;
 }
 
 .hero-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)), url("/hero.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.1)),
+    url("/hero.png");
 }
 
 /* HEADER */
 
 .header {
-    width: 100%;
-    z-index: 99999;
-    position: absolute;
+  width: 100%;
+  z-index: 99999;
+  position: absolute;
 }
 
 .inner-header {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    width: 100%;
-    margin: auto;
-    padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  width: 100%;
+  margin: auto;
+  padding: 15px;
 }
 
 .inner-header img {
-    max-height: 50px;
+  max-height: 50px;
 }
 
 .sign-in-nav-link-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .sign-in-nav-link {
-    color: white;
-    background-color: red;
-    padding: 4px 6px;
-    border-radius: 4px;
+  color: white;
+  background-color: red;
+  padding: 4px 6px;
+  border-radius: 4px;
 }
 
 /* FOOTER */
@@ -85,111 +87,109 @@ html, body {
 /* AUTH PAGE */
 
 .auth-hero {
-    color: white;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 0 20px;
-    text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0 20px;
+  text-align: center;
 }
 
 .title-auth {
-    font-size: 66px;
-    font-weight: bolder;
+  font-size: 66px;
+  font-weight: bolder;
 }
 
 .auth-form {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    max-width: 800px;
-    width: 100%;
-    margin: 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  max-width: 800px;
+  width: 100%;
+  margin: 15px 0;
 }
 
 .auth-input {
-    padding: 15px;
-    background-color: rgba(0,0,0,0.7);
-    border-radius: 3px;
-    border: 1px solid grey;
-    width: 400px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  border: 1px solid grey;
+  width: 400px;
 }
 
 .get-started {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 13px 18px;
-    border-radius: 4px;
-    background-color: red;
-    font-size: 20px;
-    font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-radius: 4px;
+  background-color: red;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* sign up section */
 
 .sign-up-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(0,0,0,0.7);
-    max-width: 400px;
-    width: 400px;
-    padding: 30px 25px;
-    gap: 10px;
-    color: white;
-    margin: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  max-width: 400px;
+  width: 400px;
+  padding: 30px 25px;
+  gap: 10px;
+  color: white;
+  margin: 15px;
 }
 
-.sign-up-container .title{
-    font-size: 22px;
-    font-weight: bolder;
+.sign-up-container .title {
+  font-size: 22px;
+  font-weight: bolder;
 }
 
 .sign-up-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
 }
 
-.my-input{
-    width: 100%;
-    border: 1px solid grey;
-    border-radius: 6px;
-    padding: 4px 4px;
-    background-color: black;
+.my-input {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 6px;
+  padding: 4px 4px;
+  background-color: black;
 }
 
 .sign-up-form .my-button {
-    width: 100%;
-    text-align: center;
-    text-align: center;
-    background-color: red;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    padding: 8px;
-    margin: 5px 0;
+  width: 100%;
+  text-align: center;
+  text-align: center;
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px;
+  margin: 5px 0;
 }
 
 .sign-in-option {
-    margin: 6px;
-    text-align: center;
+  margin: 6px;
+  text-align: center;
 }
 
 .sign-in-link {
-    color: red;
+  color: red;
 }
-
-
 
 /* SECTION */
 
 .section {
-  display:flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -268,15 +268,14 @@ html, body {
   color: white;
 }
 
-
 /* UTILS */
 
 .seperator {
-    width: 100%;
-    height: 6px;
-    background-color: rgb(35, 35, 35);
-    padding: 0;
-    margin: 0;
+  width: 100%;
+  height: 6px;
+  background-color: rgb(35, 35, 35);
+  padding: 0;
+  margin: 0;
 }
 
 .blue {
@@ -302,7 +301,6 @@ html, body {
 }
 
 @media only screen and (max-width: 900px) {
-
   /* AUTH SCREEN */
 
   .title-auth {
@@ -319,10 +317,11 @@ html, body {
     width: 100%;
   }
 
-  .get-started, .auth-input {
+  .get-started,
+  .auth-input {
     width: 100%;
   }
-  
+
   .get-started {
     display: flex;
     justify-content: center;
@@ -332,7 +331,8 @@ html, body {
     margin: 0;
   }
 
-  .auth-input, .get-started {
+  .auth-input,
+  .get-started {
     padding: 8px;
   }
 
@@ -344,7 +344,7 @@ html, body {
   }
 
   .section {
-    display:flex;
+    display: flex;
     flex-direction: column;
     text-align: center;
     align-items: center;
@@ -395,7 +395,4 @@ html, body {
     display: flex;
     flex-direction: column-reverse !important;
   }
-
 }
-
-
