@@ -11,15 +11,17 @@ function SignUpPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [username, setUsername] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
 
     if(username.trim() === "" || email.trim() === ""){
-      console.log('fields must not be empty');
+      setErrorMessage('Fields must not be empty');
       return;
     };
     if(password.trim() !== confirmPassword.trim()){
-      console.log('passwords do not match');
+      setErrorMessage('Passwords do not match');
       return;
     };
 
@@ -81,6 +83,7 @@ function SignUpPage() {
             />
             <button className="my-button" type="submit">Sign Up</button>
           </form>
+          <p className="red">{errorMessage}</p>
           <p className="sign-in-option">Already a member? <Link to="/login" className="sign-in-link">Sign In</Link></p>
         </div>
       </div>

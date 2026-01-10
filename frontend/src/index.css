@@ -22,7 +22,9 @@ html, body {
 }
 
 .auth-main {
-    height: 80vh;
+    height: 90vh;
+    max-width: 800px;
+    margin: auto;
 }
 
 .hero-bg {
@@ -92,7 +94,7 @@ html, body {
 }
 
 .title-auth {
-    font-size: 56px;
+    font-size: 66px;
     font-weight: bolder;
 }
 
@@ -101,23 +103,29 @@ html, body {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    max-width: 600px;
+    max-width: 800px;
     width: 100%;
+    margin: 15px 0;
 }
 
 .auth-input {
-    padding: 6px;
+    padding: 15px;
     background-color: rgba(0,0,0,0.7);
     border-radius: 3px;
     border: 1px solid grey;
-    width: 300px;
+    width: 400px;
 }
 
 .get-started {
     display: flex;
-    padding: 7px 12px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 18px;
     border-radius: 4px;
     background-color: red;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 /* sign up section */
@@ -275,6 +283,10 @@ html, body {
   color: blue;
 }
 
+.red {
+  color: red;
+}
+
 .small {
   font-size: 14px;
 }
@@ -314,6 +326,21 @@ html, body {
   .get-started {
     display: flex;
     justify-content: center;
+  }
+
+  .auth-form {
+    margin: 0;
+  }
+
+  .auth-input, .get-started {
+    padding: 8px;
+  }
+
+  .auth-main {
+    height: 90vh;
+    max-width: 800px;
+    margin: auto;
+    padding-top: 40px;
   }
 
   .section {

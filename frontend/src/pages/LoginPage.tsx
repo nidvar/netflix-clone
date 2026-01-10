@@ -6,6 +6,8 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const login = async () => {
     console.log("logging in");
     const payload = {
@@ -33,7 +35,7 @@ function LoginPage() {
     console.log(email, password);
 
     if(email.trim() === "" || password.trim() === ""){
-      console.log('fields must not be empty');
+      setErrorMessage('Fields must not be empty');
       return;
     };
 
@@ -71,6 +73,7 @@ function LoginPage() {
             />
             <button className="my-button" type="submit">Sign In</button>
           </form>
+          <p className="red">{errorMessage}</p>
           <p className="sign-in-option">Not a member? <a href="/signup" className="sign-in-link">Sign Up</a></p>
         </div>
       </div>
