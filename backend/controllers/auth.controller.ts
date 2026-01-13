@@ -76,7 +76,6 @@ export const login = async (req: Request, res: Response)=>{
 
 export const signUp = async (req: Request, res: Response)=>{
     try {
-
         if(validateCredentials(req.body.email, req.body.password) === false){
             return res.status(400).json({ message: 'Email and password error' });
         };
@@ -96,11 +95,17 @@ export const signUp = async (req: Request, res: Response)=>{
         const image = req.body.image || 'avatar.png';
 
         await pool.query(
-            'INSERT INTO users (email, password, image) VALUES ($1, $2, $3)', 
-            [req.body.email, hashedPassword, image]
+            'INSERT INTO users (email, username, password, image) VALUES ($1, $2, $3, $4)', 
+            [req.body.email, req.body.username, hashedPassword, image]
         );
 
-        return res.status(201).json({ message: 'User created successfully' });
+        const user = {
+            username: req.body.username,
+            email: req.body.email,
+            image: image
+        }
+
+        return res.status(201).json({ message: 'User created successfully', user: user });
     } catch (error) {
         console.error('Error in signUp controller:', error);
         return res.status(500).json({ message: 'Internal server error' });
