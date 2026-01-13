@@ -20,19 +20,44 @@ export const useAuthStore = create<AuthStore>((set)=>{
                     password: password
                 })
             };
-            const response = await fetch(backendAPI + '/api/auth/signup', payload);
-            if(response.ok){
-                const data = await response.json();
-                if(data.message === 'User created successfully'){
-                    set({user: data.user});
-                };
-                return data.message;
-            }else{
-                return 'Error';
+            try {
+                const response = await fetch(backendAPI + '/api/auth/signup', payload);
+                if(response.ok){
+                    const data = await response.json();
+                    return data.message;
+                }else{
+                    const errData = await response.json();
+                    return errData.message;
+                }
+            } catch (error) {
+                return 'Sign Up Error';
             }
         },
         login: async function(email: string, password: string){
-            console.log(email, password);
+            const payload = {
+                method: "POST",
+                credentials: "include" as RequestCredentials,
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: email,
+                    password: password
+                }),
+            };
+            try {
+                const response = await fetch("http://localhost:3001/api/auth/login", payload);
+                if(response.ok){
+                    const data = await response.json();
+                    return data.message;
+                }else{
+                    const errData = await response.json();
+                    return errData.message;
+                }
+            } catch (error) {
+                console.log(error);
+                return 'Login Error';
+            }
         },
         logout: async function(){
 

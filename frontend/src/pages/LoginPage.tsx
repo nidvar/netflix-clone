@@ -1,45 +1,32 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useAuthStore } from "../store/authUser";
 
 function LoginPage() {
+
+  const authStore = useAuthStore();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const login = async () => {
-    console.log("logging in");
-    const payload = {
-      method: "POST",
-      credentials: "include" as RequestCredentials,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      }),
-    };
-    const response = await fetch(
-      "http://localhost:3001/api/auth/login",
-      payload
-    );
-    console.log(response);
-    const data = await response.json();
-    console.log(data);
-  };
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
-    console.log(email, password);
 
     if(email.trim() === "" || password.trim() === ""){
       setErrorMessage('Fields must not be empty');
       return;
     };
 
-    login();
+    const result = await authStore.login(email, password);
+    if(result === 'Login successful'){
+      navigate("/");
+    }else{
+      setErrorMessage(result);
+    }
   }
 
   return (
