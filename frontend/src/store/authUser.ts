@@ -46,7 +46,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 }),
             };
             try {
-                const response = await fetch("http://localhost:3001/api/auth/login", payload);
+                const response = await fetch(backendAPI + "/api/auth/login", payload);
                 if(response.ok){
                     const data = await response.json();
                     return data.message;
@@ -60,10 +60,26 @@ export const useAuthStore = create<AuthStore>((set)=>{
             }
         },
         logout: async function(){
-
+            const payload = {
+                method: "POST",
+                credentials: "include" as RequestCredentials
+            };
+            try {
+                const response = await fetch(backendAPI + "/api/auth/logout", payload);
+                const data= await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         },
         checkAuth: async function(){
-
+            try {
+                const response = await fetch(backendAPI + "/api/auth/authCheck", {credentials: "include" as RequestCredentials});
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 });

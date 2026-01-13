@@ -114,6 +114,7 @@ export const signUp = async (req: Request, res: Response)=>{
 
 export const logout = async (req: Request, res: Response)=>{
     try {
+
         res.clearCookie('accessToken-nf-clone', {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
@@ -130,6 +131,7 @@ export const logout = async (req: Request, res: Response)=>{
             'UPDATE users SET refresh_token = NULL WHERE id = $1', 
             [res.locals.userId]
         );
+
         return res.status(200).json({ message: 'Logout successful' });
     } catch (error) {
         console.error('Error in logout controller:', error);
@@ -174,3 +176,17 @@ export const refreshTokenEndpoint = async (req: Request, res: Response) => {
         return res.status(401).json({message: 'refreshToken error'});
     }
 };
+
+export const authCheck = async (req: Request, res: Response)=>{
+    try {
+        const token = req.cookies['accessToken-nf-clone'];
+        if(!token){
+            return res.status(401).json({message: 'Unauthorized: No token provided'});
+        };
+        jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
+        return res.status(200).json({message: 'Authorized'});
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json({message: 'authCheck error, or invalid token'});
+    }
+}
