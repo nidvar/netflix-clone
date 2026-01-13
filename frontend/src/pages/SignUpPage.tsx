@@ -30,7 +30,14 @@ function SignUpPage() {
       return;
     };
 
-    setResult(await authStore.signUp(email, username, password));
+    const response = await authStore.signUp(email, username, password);
+    
+    if(response === 'User created successfully'){
+      setResult('User created successfully');
+    }else{
+      setErrorMessage(response);
+    };
+
   };
 
   useEffect(()=>{
