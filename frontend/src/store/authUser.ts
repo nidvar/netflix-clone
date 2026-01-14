@@ -6,7 +6,8 @@ const backendAPI = import.meta.env.VITE_BACKEND_API;
 
 export const useAuthStore = create<AuthStore>((set)=>{
     return {
-        user: null,
+        user: localStorage.getItem('netflixCloneImage') || null,
+        signedIn: false,
         signUp: async function(email: string, username: string, password: string){
             const payload = {
                 method: 'POST',
@@ -49,6 +50,8 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 const response = await fetch(backendAPI + "/api/auth/login", payload);
                 if(response.ok){
                     const data = await response.json();
+                    localStorage.setItem('netflixCloneImage', data.user.image);
+                    set({signedIn: true});
                     return data.message;
                 }else{
                     const errData = await response.json();
@@ -67,6 +70,8 @@ export const useAuthStore = create<AuthStore>((set)=>{
             try {
                 const response = await fetch(backendAPI + "/api/auth/logout", payload);
                 const data= await response.json();
+                localStorage.setItem('netflixCloneImage', '');
+                set({signedIn: false});
                 console.log(data);
             } catch (error) {
                 console.log(error);
@@ -76,8 +81,10 @@ export const useAuthStore = create<AuthStore>((set)=>{
             try {
                 const response = await fetch(backendAPI + "/api/auth/authCheck", {credentials: "include" as RequestCredentials});
                 const data = await response.json();
+                set({signedIn: true});
                 console.log(data);
             } catch (error) {
+                set({signedIn: false});
                 console.log(error);
             }
         }

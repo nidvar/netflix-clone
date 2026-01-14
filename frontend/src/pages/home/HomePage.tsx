@@ -1,18 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuthStore } from "../../store/authUser";
 
 import AuthScreen from "./AuthScreen";
 import HomeScreen from "./HomeScreen";
-import { Link } from "react-router-dom";
 
 function HomePage() {
 
-  // const [user, setUser] = useState(false);
+  const authStore = useAuthStore();
+  const [signedIn, setSignedIn] = useState(false);
 
-  const user = false;
+  useEffect(()=>{
+    authStore.signedIn === true? setSignedIn(true): setSignedIn(false);
+  }, [authStore.signedIn]);
 
   return (
     <div className="hero-bg">
-      {user? <HomeScreen />: <AuthScreen />}
+      {signedIn? <HomeScreen />: <AuthScreen />}
     </div>
   );
 }

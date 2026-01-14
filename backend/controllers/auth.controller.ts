@@ -66,7 +66,11 @@ export const login = async (req: Request, res: Response)=>{
             maxAge: 3* 60 * 60 * 1000,
         });
 
-        return res.status(200).json({ message: 'Login successful' });
+        return res.status(200).json({ message: 'Login successful', user: {
+            email: user.email,
+            username: user.username,
+            image: user.image
+        }});
 
     } catch (error) {
         console.error('Error in login controller:', error);
@@ -179,11 +183,6 @@ export const refreshTokenEndpoint = async (req: Request, res: Response) => {
 
 export const authCheck = async (req: Request, res: Response)=>{
     try {
-        const token = req.cookies['accessToken-nf-clone'];
-        if(!token){
-            return res.status(401).json({message: 'Unauthorized: No token provided'});
-        };
-        jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
         return res.status(200).json({message: 'Authorized'});
     } catch (error) {
         console.log(error);
