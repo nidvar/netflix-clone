@@ -270,6 +270,11 @@ body {
 
 /* UTILS */
 
+.loading-message {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
 .seperator {
   width: 100%;
   height: 6px;

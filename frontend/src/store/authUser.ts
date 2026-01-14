@@ -7,8 +7,10 @@ const backendAPI = import.meta.env.VITE_BACKEND_API;
 export const useAuthStore = create<AuthStore>((set)=>{
     return {
         user: localStorage.getItem('netflixCloneImage') || null,
+        isLoading: false,
         signedIn: false,
         signUp: async function(email: string, username: string, password: string){
+            set({isLoading: true});
             const payload = {
                 method: 'POST',
                 credentials: 'include' as RequestCredentials,
@@ -25,16 +27,20 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 const response = await fetch(backendAPI + '/api/auth/signup', payload);
                 if(response.ok){
                     const data = await response.json();
+                    set({isLoading: false});
                     return data.message;
                 }else{
                     const errData = await response.json();
+                    set({isLoading: false});
                     return errData.message;
                 }
             } catch (error) {
+                set({isLoading: false});
                 return 'Sign Up Error';
             }
         },
         login: async function(email: string, password: string){
+            set({isLoading: true});
             const payload = {
                 method: "POST",
                 credentials: "include" as RequestCredentials,
@@ -52,13 +58,16 @@ export const useAuthStore = create<AuthStore>((set)=>{
                     const data = await response.json();
                     localStorage.setItem('netflixCloneImage', data.user.image);
                     set({signedIn: true});
+                    set({isLoading: false});
                     return data.message;
                 }else{
                     const errData = await response.json();
+                    set({isLoading: false});
                     return errData.message;
                 }
             } catch (error) {
                 console.log(error);
+                set({isLoading: false});
                 return 'Login Error';
             }
         },
@@ -80,6 +89,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
         checkAuth: async function(){
             try {
                 const response = await fetch(backendAPI + "/api/auth/authcheck", {credentials: "include" as RequestCredentials});
+                console.log(response.ok)
                 set({signedIn: response.ok});
                 console.log(await response.json());
             } catch (error) {
