@@ -7,11 +7,11 @@ import HomeScreen from "./HomeScreen";
 function HomePage() {
 
   const authStore = useAuthStore();
-  const [signedIn, setSignedIn] = useState(false);
+  const signedIn = authStore.signedIn;
 
   useEffect(()=>{
-    authStore.signedIn === true? setSignedIn(true): setSignedIn(false);
-  }, [authStore.signedIn]);
+    authStore.checkAuth();
+  }, []);
 
   return (
     <div className="hero-bg">
