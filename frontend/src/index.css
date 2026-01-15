@@ -423,7 +423,7 @@ body {
   }
 
   .desktop-hide {
-    display: block;
+    display: flex;
   }
 
   /* UTILS */

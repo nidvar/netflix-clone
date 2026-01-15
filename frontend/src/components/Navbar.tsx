@@ -23,7 +23,7 @@ function Navbar() {
                     <Menu className="hand-hover desktop-hide" />
                 </div>
             </div>
-            <div className="flex flex-col gap-2 mobile-menu">
+            <div className="desktop-hide flex flex-col gap-2 mobile-menu ">
                 <Link to="/" >Movies</Link>
                 <Link to="/" >Tv Shows</Link>
                 <Link to="/" >Search History</Link>
