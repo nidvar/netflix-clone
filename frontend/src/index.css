@@ -269,6 +269,10 @@ body {
 /* UTILS ===============================================================================*/
 /* UTILS ===============================================================================*/
 
+.hover-underline:hover {
+  text-decoration: underline;
+}
+
 .my-button {
     text-align: center;
     border: none;

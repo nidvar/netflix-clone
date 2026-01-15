@@ -1,9 +1,11 @@
 import { LogOut, Menu, Search } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { useAuthStore } from "../store/authUser";
+import { useContentTypeStore } from "../store/contentType";
 
 function Navbar() {
   const authStore = useAuthStore();
+  const contentType = useContentTypeStore();
   return (
     <>
         <div className="header white">
@@ -13,9 +15,9 @@ function Navbar() {
                         <img className="logo" src="/netflix-logo.png" alt="logo" />
                     </Link>
                     <div className="header-desktop-menu mobile-hide">
-                        <Link to="/" >Movies</Link>
-                        <Link to="/" >Tv Shows</Link>
-                        <Link to="/" >Search History</Link>
+                        <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
+                        <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tvshow')}}>Tv Shows</Link>
+                        <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('history')}}>Search History</Link>
                     </div>
                 </div>
                 <div className="flex center gap-3">

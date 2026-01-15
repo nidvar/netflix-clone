@@ -7,3 +7,8 @@ export type AuthStore = {
     logout: ()=> Promise<void>;
     checkAuth: ()=> Promise<void>;
 }
+
+export type ContentTypeStore = {
+    contentType: string | null;
+    setContentType: (contentType: string)=> void;
+}
