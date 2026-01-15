@@ -1,7 +1,9 @@
 import { LogOut, Menu, Search } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { useAuthStore } from "../store/authUser";
 
 function Navbar() {
+  const authStore = useAuthStore();
   return (
     <>
         <div className="header white bg-black">
@@ -19,7 +21,7 @@ function Navbar() {
                 <div className="flex center gap-3">
                     <Search className="hand-hover" />
                     <img src="/avatar1.png" className="hand-hover profile-image" />
-                    <LogOut className="hand-hover" />
+                    <LogOut className="hand-hover" onClick={function(){authStore.logout()}}/>
                     <Menu className="hand-hover desktop-hide" />
                 </div>
             </div>
