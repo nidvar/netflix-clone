@@ -6,7 +6,7 @@ function Navbar() {
   const authStore = useAuthStore();
   return (
     <>
-        <div className="header white bg-black">
+        <div className="header white">
             <div className="inner-header">
                 <div className="flex center gap-3 mobile">
                     <Link to="/" >

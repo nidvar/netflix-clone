@@ -20,25 +20,27 @@ function App() {
   }, []);
   
   return (
-    <>
-      {
-        loading?
-        <div className="main hero-bg">
-          <div className="sign-up-container">
-            <p className="loading-message">Loading...</p>
-          </div>
-        </div>:
-        <>
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/login' element={!signedIn?<LoginPage />: <Navigate to="/" />} />
-            <Route path='/signup' element={!signedIn?<SignUpPage />: <Navigate to="/" />} />
-            <Route path='*' element={<HomePage />} />
-          </Routes>
-          <Footer />
-        </>
-      }
-    </>
+    <div className='min-h-screen flex flex-col'>
+      <div className='flex-grow'>
+        {
+          loading?
+          <div className="main hero-bg">
+            <div className="sign-up-container">
+              <p className="loading-message">Loading...</p>
+            </div>
+          </div>:
+          <>
+            <Routes>
+              <Route path='/' element={<HomePage />} />
+              <Route path='/login' element={!signedIn?<LoginPage />: <Navigate to="/" />} />
+              <Route path='/signup' element={!signedIn?<SignUpPage />: <Navigate to="/" />} />
+              <Route path='*' element={<HomePage />} />
+            </Routes>
+          </>
+        }
+      </div>
+      <Footer />
+    </div>
   )
 }
 
