@@ -22,7 +22,12 @@ function App() {
   return (
     <>
       {
-        loading?<div>Loading...</div>:
+        loading?
+        <div className="main hero-bg">
+          <div className="sign-up-container">
+            <p className="loading-message">Loading...</p>
+          </div>
+        </div>:
         <>
           <Routes>
             <Route path='/' element={<HomePage />} />
