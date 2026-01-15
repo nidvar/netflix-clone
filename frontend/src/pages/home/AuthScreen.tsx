@@ -20,12 +20,12 @@ function AuthScreen() {
       <div className="header">
         <div className="inner-header">
           <Link to="/" ><img className="logo" src="/netflix-logo.png" alt="logo" /></Link>
-          <div className="sign-in-nav-link-container">
+          <div className="flex flex-col justify-center">
             <Link to="/login" className="sign-in-nav-link">Sign In</Link>
           </div>
         </div>
       </div>
-      <div className="main auth-main auth-hero">
+      <div className="main auth-main auth-hero flex flex-col gap-4">
         <h1 className="title-auth">Unlimited movies, TV shows, and more.</h1>
         <p>Watch anywhere. Cancel anytime.</p>
         <p>Ready to watch? Enter your email to create or restart your membership.</p>

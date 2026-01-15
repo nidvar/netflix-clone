@@ -6,7 +6,7 @@ function Navbar() {
     <>
         <div className="header white bg-black">
             <div className="inner-header">
-                <div className="header-side mobile">
+                <div className="flex center gap-3 mobile">
                     <Link to="/" >
                         <img className="logo" src="/netflix-logo.png" alt="logo" />
                     </Link>
@@ -16,12 +16,17 @@ function Navbar() {
                         <Link to="/" >Search History</Link>
                     </div>
                 </div>
-                <div className="header-side">
+                <div className="flex center gap-3">
                     <Search className="hand-hover" />
                     <img src="/avatar1.png" className="hand-hover profile-image" />
                     <LogOut className="hand-hover" />
                     <Menu className="hand-hover desktop-hide" />
                 </div>
+            </div>
+            <div className="flex flex-col gap-2 mobile-menu">
+                <Link to="/" >Movies</Link>
+                <Link to="/" >Tv Shows</Link>
+                <Link to="/" >Search History</Link>
             </div>
         </div>
     </>

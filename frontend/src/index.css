@@ -54,23 +54,11 @@ body {
   max-height: 50px;
 }
 
-.sign-in-nav-link-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .sign-in-nav-link {
   color: white;
   background-color: red;
   padding: 4px 6px;
   border-radius: 4px;
-}
-
-.header-side {
-  display: flex;
-  align-items: center;
-  gap: 15px;
 }
 
 .profile-image {
@@ -79,21 +67,17 @@ body {
 }
 
 .header-desktop-menu {
+  margin-left: 30px;
   display: flex;
   gap: 15px;
 }
 
 /* FOOTER */
 .footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   padding: 20px;
   background-color: black;
   color: white;
   font-size: 18px;
-  gap: 10px;
 }
 
 .link-underline {
@@ -104,9 +88,6 @@ body {
 
 .auth-hero {
   color: white;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
   padding: 0 20px;
   text-align: center;
 }
@@ -378,6 +359,13 @@ body {
     max-width: 800px;
     margin: auto;
     padding-top: 40px;
+  }
+
+  .mobile-menu {
+    padding: 10px;
+    border: 1px solid grey;
+    border-radius: 4px;
+    margin: 5px 18px;
   }
 
   .section {
