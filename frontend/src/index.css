@@ -135,7 +135,7 @@ body {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);
   max-width: 400px;
-  width: 400px;
+  width: 90%;
   padding: 30px 25px;
   gap: 10px;
   color: white;
@@ -416,6 +416,10 @@ body {
 
   .mobile img{
     max-height: 30px;
+  }
+
+  .logo{
+    height: 30px;
   }
 
   .mobile-hide {
