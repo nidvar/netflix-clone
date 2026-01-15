@@ -67,6 +67,22 @@ body {
   border-radius: 4px;
 }
 
+.header-side {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile-image {
+  height: 30px;
+  border-radius: 4px;
+}
+
+.header-desktop-menu {
+  display: flex;
+  gap: 15px;
+}
+
 /* FOOTER */
 .footer {
   display: flex;
@@ -270,6 +286,14 @@ body {
 
 /* UTILS */
 
+.desktop-hide {
+  display: none;
+}
+
+.hand-hover {
+  cursor: pointer;
+}
+
 .loading-message {
   font-size: 24px;
   font-weight: bolder;
@@ -291,6 +315,10 @@ body {
   color: red;
 }
 
+.white {
+  color: white;
+}
+
 .small {
   font-size: 14px;
 }
@@ -304,6 +332,10 @@ body {
 .relative {
   position: relative;
 }
+
+/* MOBILE ============================================================================== */
+/* MOBILE ============================================================================== */
+/* MOBILE ============================================================================== */
 
 @media only screen and (max-width: 900px) {
   /* AUTH SCREEN */
@@ -392,6 +424,18 @@ body {
 
   .downloading-box {
     top: 160px;
+  }
+
+  .mobile img{
+    max-height: 30px;
+  }
+
+  .mobile-hide {
+    display: none;
+  }
+
+  .desktop-hide {
+    display: block;
   }
 
   /* UTILS */

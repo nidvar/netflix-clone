@@ -1,3 +1,5 @@
+import Navbar from "../../components/Navbar";
+
 function HomeScreen() {
 
   const grabMovies = async () => {
@@ -12,10 +14,14 @@ function HomeScreen() {
   };
 
   return (
-    <div className="temp-con">
-      <h1>HOME SCREEN</h1><br />
-      <button onClick={function(){grabMovies()}}>GRAB MOVIES</button><br />
-    </div>
+    <>
+      <Navbar />
+      <br /><br /><br /><br />
+      <div>
+        <h1>HOME SCREEN</h1><br />
+        <button onClick={function(){grabMovies()}}>GRAB MOVIES</button><br />
+      </div>
+    </>
   )
 }
 

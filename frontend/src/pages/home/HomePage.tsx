@@ -14,9 +14,9 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="hero-bg">
+    <>
       {signedIn? <HomeScreen />: <AuthScreen />}
-    </div>
+    </>
   );
 }
 
