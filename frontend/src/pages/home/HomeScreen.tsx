@@ -3,6 +3,8 @@ import { Info, Play } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 
+import useGetTrendingContent from "../../hooks/useGetTrendingContent";
+
 function HomeScreen() {
 
   const grabMovies = async () => {
@@ -11,10 +13,10 @@ function HomeScreen() {
       "http://localhost:3001/api/movies/movie/trending",
       { credentials: "include" as RequestCredentials }
     );
-    console.log(response);
     const data = await response.json();
-    console.log(data);
   };
+
+  const data = useGetTrendingContent();
 
   return (
     <>

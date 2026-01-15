@@ -11,7 +11,6 @@ export const protectRoute = (req: Request, res: Response, next: NextFunction) =>
         if(!decodedToken) {
             return res.status(401).json('Unauthorized: Invalid token');
         };
-        console.log('protect route passed');
         res.locals.userId = decodedToken.id;
         next();
     } catch (error) {
