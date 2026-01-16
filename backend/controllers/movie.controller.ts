@@ -19,7 +19,7 @@ export const trendingMovie = async (req: Request, res: Response) => {
     try {
         const data = await fetchData(`https://api.themoviedb.org/3/trending/${type}/day?language=en-US`);
         if(data.results && data.results.length > 0){
-            const trendingMovie = data.results[0];
+            const trendingMovie = data.results[Math.floor(Math.random() * data.results?.length)];
             return res.status(200).json({movie: trendingMovie});
         }
         return res.status(404).json('No trending movie found');

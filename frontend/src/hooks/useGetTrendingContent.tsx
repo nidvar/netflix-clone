@@ -8,9 +8,18 @@ const useGetTrendingContent = () => {
     const [trendingContent, setTrendingContent] = useState<any>(null);
 
     const grabTrendingContent = async () => {
-        const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/' + contentType.contentType + '/trending', {credentials: "include" as RequestCredentials});
-        const data = await response.json();
-        setTrendingContent(data.movie);
+        try {
+            const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/' + contentType.contentType + '/trending', {credentials: "include" as RequestCredentials});
+            if(response.ok){
+                const data = await response.json();
+                setTrendingContent(data.movie);
+            }else{
+                setTrendingContent(null);
+            }
+        } catch (error) {
+            console.log(error);
+            setTrendingContent(null);
+        }
     }
 
     useEffect(() => {
