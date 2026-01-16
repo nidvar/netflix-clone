@@ -1,9 +1,11 @@
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import { Info, Play } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
-import { Link } from "react-router-dom";
-
+import MovieSlider from "../../components/MovieSlider";
+import TvSlider from "../../components/TvSlider";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 
 function HomeScreen() {
@@ -34,25 +36,33 @@ function HomeScreen() {
         alt="Hero Image" 
         className="absolute top-0 left-0 w-full h-full object-cover -z-50"
       />
-      <div className="absolute top-0 left-0 w-full h-full object-cover bg-black/30 -z-50" aria-hidden="true" />
-      <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center px-8 md:px-16 lg:px-32'>
-        <div className='bg-gradient-to-b from-black via-transparent to-transparent absolute w-full h-full top-0 left-0 -z-10' />
-        <div className="white movie-info flex flex-col gap-2">
-          <h1 className="text-4xl font-bold text-heading">{data?.title || data?.name}</h1>
-          <p>{data?.release_date || data?.first_air_date} | {data?.adult? '18+' : '13+'}</p>
-          <p>{data?.overview}</p>
-          <div className="flex gap-4 font-bold">
-            <Link to='/' className="my-button bg-white black flex gap-2">
-              <Play className="fill-black"/>
-              Play
-            </Link>
-            <Link to='/' className="my-button bg-gray-400/75 flex gap-2">
-              <Info />
-              More Info
-            </Link>
+      <div className="relative h-screen">
+        <div className="absolute top-0 left-0 w-full h-full object-cover bg-black/30 -z-50" aria-hidden="true" />
+        <div className='absolute top-0 left-0 w-full h-full flex flex-col justify-center px-8 md:px-16 lg:px-32'>
+          <div className='bg-gradient-to-b from-black via-transparent to-transparent absolute w-full h-full top-0 left-0 -z-10' />
+          <div className="white movie-info flex flex-col gap-2">
+            <h1 className="text-4xl font-bold text-heading">{data?.title || data?.name}</h1>
+            <p>{data?.release_date || data?.first_air_date} | {data?.adult? '18+' : '13+'}</p>
+            <p>{data?.overview}</p>
+            <div className="flex gap-4 font-bold">
+              <Link to='/' className="my-button bg-white black flex gap-2">
+                <Play className="fill-black"/>
+                Play
+              </Link>
+              <Link to='/' className="my-button bg-gray-400/75 flex gap-2">
+                <Info />
+                More Info
+              </Link>
+            </div>
           </div>
         </div>
       </div>
+      
+      <div className="content-sliders">
+
+      </div>
+      <MovieSlider />
+      <TvSlider />
     </>
   )
 }
