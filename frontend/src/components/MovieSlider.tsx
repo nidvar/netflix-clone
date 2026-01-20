@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { CircleArrowRight, CircleArrowLeft } from "lucide-react";
+import { ChevronRight, ChevronLeft  } from "lucide-react";
 
 import { useContentTypeStore } from "../store/contentType";
 
@@ -8,14 +8,17 @@ import type { MovieSliderProps, MovieType } from "../types";
 function MovieSlider(props: MovieSliderProps) {
 
   const contentTypeStore = useContentTypeStore();
+
   const [data, setData] = useState<MovieType[]>([]);
+  const [showArrows, setShowArrows] = useState(false);
+
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const formatting = props.category.replaceAll("_", " ");
   const formatted = formatting.charAt(0).toUpperCase() + formatting.slice(1);
 
   const cssPropertiesArrows = {
-    size: 52,
+    size: 42,
     strokeWidth: 0.5,
     className: "scroll-arrow hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105"
   }
@@ -63,10 +66,20 @@ function MovieSlider(props: MovieSliderProps) {
   return (
     <div className="slider-section relative white">
       <h1 className="white">{formatted}</h1>
-      <div className="slider-container" ref={sliderRef}>
+      <div
+        className="slider-container" 
+        ref={sliderRef}
+        onMouseEnter={() => setShowArrows(true)}
+        onMouseLeave={() => setShowArrows(false)}
+      >
         <div className="scroll-arrow-container group">
-          <CircleArrowLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollLeft}/>
-          <CircleArrowRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollRight}/>
+          {
+            showArrows === true?
+            <>
+              <ChevronLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollLeft}/>
+              <ChevronRight  size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollRight}/>
+            </>:''
+          }
         </div>
         {
           data.length > 0?
