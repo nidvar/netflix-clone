@@ -55,7 +55,7 @@ function HomeScreen() {
                 <Play className="fill-black"/>
                 Play
               </Link>
-              <Link to='/' className="my-button bg-gray-400/75 flex gap-2">
+              <Link to={'/watch' + data?.id} className="my-button bg-gray-400/75 flex gap-2">
                 <Info />
                 More Info
               </Link>

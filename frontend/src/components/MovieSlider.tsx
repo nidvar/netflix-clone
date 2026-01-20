@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { ChevronRight, ChevronLeft  } from "lucide-react";
 
 import { useContentTypeStore } from "../store/contentType";
@@ -11,6 +13,8 @@ function MovieSlider(props: MovieSliderProps) {
 
   const [data, setData] = useState<MovieType[]>([]);
   const [showArrows, setShowArrows] = useState(false);
+
+  const navigate = useNavigate();
 
   const sliderRef = useRef<HTMLDivElement>(null);
 
@@ -76,8 +80,7 @@ function MovieSlider(props: MovieSliderProps) {
           {
             showArrows === true?
             <>
-              <ChevronLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollLeft}/>
-              <ChevronRight  size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollRight}/>
+              <ChevronLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollLeft}/>
             </>:''
           }
         </div>
@@ -90,12 +93,21 @@ function MovieSlider(props: MovieSliderProps) {
                   alt="Movie image"
                   src={"https://image.tmdb.org/t/p/w500" + item.backdrop_path}
                   className="transition-transform duration-300 ease-in-out group-hover:scale-105"
+                  onClick={function(){navigate("/watch/" + item.id)}}
                 />
                 <p className="center">{item.title? item.title: item.name}</p>
               </div>
             )
           }):''
         }
+        <div className="scroll-arrow-container right-chevron group">
+          {
+            showArrows === true?
+            <>
+              <ChevronRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollLeft}/>
+            </>:''
+          }
+        </div>
       </div>
     </div>
   )

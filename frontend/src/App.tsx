@@ -7,6 +7,7 @@ import HomePage from './pages/home/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import Footer from './components/Footer'
+import WatchPage from './pages/WatchPage'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
               <Route path='/' element={<HomePage />} />
               <Route path='/login' element={!signedIn?<LoginPage />: <Navigate to="/" />} />
               <Route path='/signup' element={!signedIn?<SignUpPage />: <Navigate to="/" />} />
+              <Route path='/watch/:id' element={signedIn?<WatchPage />: <Navigate to="/login" />} />
               <Route path='*' element={<HomePage />} />
             </Routes>
           </>

@@ -288,9 +288,11 @@ body {
   position: absolute;
   top: 100px;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
   z-index: 9999;
+}
+
+.right-chevron {
+  right: 0;
 }
 
 .scroll-arrow {
