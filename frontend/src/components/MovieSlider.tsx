@@ -65,7 +65,7 @@ function MovieSlider(props: MovieSliderProps) {
 
   return (
     <div className="slider-section relative white">
-      <h1 className="white">{formatted}</h1>
+      <h1 className="white text-xl font-bold">{formatted}</h1>
       <div
         className="slider-container" 
         ref={sliderRef}

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { LogOut, Menu, Search } from "lucide-react";
 import { Link } from 'react-router-dom';
 import { useAuthStore } from "../store/authUser";
@@ -6,6 +8,9 @@ import { useContentTypeStore } from "../store/contentType";
 function Navbar() {
   const authStore = useAuthStore();
   const contentType = useContentTypeStore();
+
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <>
         <div className="header white">
@@ -24,14 +29,18 @@ function Navbar() {
                     <Search className="hand-hover" />
                     <img src="/avatar1.png" className="hand-hover profile-image" />
                     <LogOut className="hand-hover" onClick={function(){authStore.logout()}}/>
-                    <Menu className="hand-hover desktop-hide" />
+                    <Menu className="hand-hover desktop-hide" onClick={function(){setShowMenu(!showMenu)}} />
                 </div>
             </div>
-            <div className="desktop-hide flex flex-col gap-2 mobile-menu ">
-                <Link to="/" >Movies</Link>
-                <Link to="/" >Tv Shows</Link>
-                <Link to="/" >Search History</Link>
-            </div>
+            {
+                showMenu?
+                    <div className="desktop-hide flex flex-col gap-2 mobile-menu ">
+                    <Link to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
+                    <Link to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
+                    <Link to="/" onClick={function(){console.log('search history')}}>Search History</Link>
+                </div>:
+                <></>
+            }
         </div>
     </>
   )
