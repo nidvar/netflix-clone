@@ -11,6 +11,9 @@ function MovieSlider(props: MovieSliderProps) {
   const [data, setData] = useState<MovieType[]>([]);
   const sliderRef = useRef<HTMLDivElement>(null);
 
+  const formatting = props.category.replaceAll("_", " ");
+  const formatted = formatting.charAt(0).toUpperCase() + formatting.slice(1);
+
   const cssPropertiesArrows = {
     size: 52,
     strokeWidth: 0.5,
@@ -26,7 +29,6 @@ function MovieSlider(props: MovieSliderProps) {
       const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/' +  contentTypeStore.contentType + '/categories/' + props.category, payload);
       if(response.ok){
         const data = await response.json();
-        console.log(data.movies.results)
         setData(data.movies.results);
       }else{
         console.log(response);
@@ -60,7 +62,7 @@ function MovieSlider(props: MovieSliderProps) {
 
   return (
     <div className="slider-section relative white">
-      <h1 className="white">{props.category}</h1>
+      <h1 className="white">{formatted}</h1>
       <div className="slider-container" ref={sliderRef}>
         <div className="scroll-arrow-container group">
           <CircleArrowLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollLeft}/>
@@ -76,7 +78,7 @@ function MovieSlider(props: MovieSliderProps) {
                   src={"https://image.tmdb.org/t/p/w500" + item.backdrop_path}
                   className="transition-transform duration-300 ease-in-out group-hover:scale-105"
                 />
-                <p className="center">{item.title}</p>
+                <p className="center">{item.title? item.title: item.name}</p>
               </div>
             )
           }):''

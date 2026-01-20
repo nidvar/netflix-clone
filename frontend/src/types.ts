@@ -31,6 +31,7 @@ export type MovieType = {
   popularity: number
   poster_path: string
   release_date: string
-  title: string
+  title?: string
   video: boolean,
+  name?:string
 }
