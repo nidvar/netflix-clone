@@ -1,8 +1,10 @@
-import React from 'react'
+import type { TvSliderProps } from "../types";
 
-function TvSlider() {
+function TvSlider(props: TvSliderProps) {
   return (
-    <div>TvSlider</div>
+    <div>
+      <h1 className="white">{props.category}</h1>
+    </div>
   )
 }
 

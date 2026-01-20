@@ -265,10 +265,21 @@ body {
   width: 90%;
 }
 
-.content-sliders {
+/* SLIDER ITEM ===============================================================================*/
+/* SLIDER ITEM ===============================================================================*/
+/* SLIDER ITEM ===============================================================================*/
+
+.slider-container {
   display: flex;
-  background-color: black;
-  min-height: 100px;
+  gap: 20px;
+  overflow-x: auto;
+  padding: 15px 0;
+}
+
+.slider-item {
+  max-height: 150px;
+  min-width: 100px;
+  background-color: wheat;
 }
 
 /* UTILS ===============================================================================*/

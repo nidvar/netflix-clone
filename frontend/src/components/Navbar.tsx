@@ -17,7 +17,7 @@ function Navbar() {
                     <div className="header-desktop-menu mobile-hide">
                         <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
                         <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
-                        <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('history')}}>Search History</Link>
+                        <Link className="hover-underline" to="/" onClick={function(){console.log('search history')}}>Search History</Link>
                     </div>
                 </div>
                 <div className="flex center gap-3">

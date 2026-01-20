@@ -8,7 +8,14 @@ import MovieSlider from "../../components/MovieSlider";
 import TvSlider from "../../components/TvSlider";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 
+import {useContentTypeStore} from "../../store/contentType";
+
 function HomeScreen() {
+
+  const movie_category = ["now_playing", "top_rated", "popular", "upcoming"];
+  const tv_category = ["airing_today", "on_the_air", "popular", "top_rated"];
+
+  const contentTypeStore = useContentTypeStore();
 
   let placeholderData = {
     backdrop_path: "/sK3z0Naed3H1Wuh7a21YRVMxYqt.jpg",
@@ -57,12 +64,19 @@ function HomeScreen() {
           </div>
         </div>
       </div>
-      
-      <div className="content-sliders">
 
+      <div className="flex flex-col gap-10 bg-black p-10">
+        {
+          contentTypeStore.contentType === 'movie'?
+          movie_category.map((item)=>{
+            return <MovieSlider category={item} key={item}/>
+          }):
+          tv_category.map((item)=>{
+            return <TvSlider category={item} key={item}/>
+          })
+        }
       </div>
-      <MovieSlider />
-      <TvSlider />
+
     </>
   )
 }
