@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { CircleArrowRight, CircleArrowLeft } from "lucide-react";
 
 import { useContentTypeStore } from "../store/contentType";
 
@@ -8,6 +9,13 @@ function MovieSlider(props: MovieSliderProps) {
 
   const contentTypeStore = useContentTypeStore();
   const [data, setData] = useState<MovieType[]>([]);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const cssPropertiesArrows = {
+    size: 52,
+    strokeWidth: 0.5,
+    className: "scroll-arrow hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105"
+  }
 
   const grabData = async ()=>{
     const payload = {
@@ -26,22 +34,49 @@ function MovieSlider(props: MovieSliderProps) {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+
+  const scrollLeft = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: -300, // pixels to scroll left
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (sliderRef.current) {
+      sliderRef.current.scrollBy({
+        left: 300, // pixels to scroll right
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(()=>{
     grabData();
   }, [contentTypeStore.contentType]);
 
   return (
-    <div className="slider-section white">
+    <div className="slider-section relative white">
       <h1 className="white">{props.category}</h1>
-      <div className="slider-container">
+      <div className="slider-container" ref={sliderRef}>
+        <div className="scroll-arrow-container group">
+          <CircleArrowLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollLeft}/>
+          <CircleArrowRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} stroke-width={cssPropertiesArrows.className} onClick={scrollRight}/>
+        </div>
         {
           data.length > 0?
           data.map((item)=>{
             return (
-              <div className="slider-item" key={item.id}>
-                <img src={"https://image.tmdb.org/t/p/w500" + item.poster_path} />
+              <div className="slider-item hand-hover group flex flex-col gap-2" key={item.id}>
+                <img
+                  alt="Movie image"
+                  src={"https://image.tmdb.org/t/p/w500" + item.backdrop_path}
+                  className="transition-transform duration-300 ease-in-out group-hover:scale-105"
+                />
+                <p className="center">{item.title}</p>
               </div>
             )
           }):''

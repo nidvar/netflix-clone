@@ -277,9 +277,40 @@ body {
 }
 
 .slider-item {
-  max-height: 150px;
-  min-width: 100px;
-  background-color: wheat;
+  min-width: 280px;
+}
+
+.slider-item img {
+  border-radius: 8px;
+}
+
+.scroll-arrow-container {
+  position: absolute;
+  top: 100px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 9999;
+}
+
+.scroll-arrow {
+  background-color: black;
+  border-radius: 50%;
+  color: grey;
+}
+
+.slider-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.slider-container {
+  scrollbar-width: none;
+}
+
+/* IE/Edge */
+.slider-container {
+  -ms-overflow-style: none;
 }
 
 /* UTILS ===============================================================================*/
