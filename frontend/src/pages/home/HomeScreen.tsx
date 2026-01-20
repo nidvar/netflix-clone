@@ -5,7 +5,6 @@ import { Info, Play } from "lucide-react";
 
 import Navbar from "../../components/Navbar";
 import MovieSlider from "../../components/MovieSlider";
-import TvSlider from "../../components/TvSlider";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 
 import {useContentTypeStore} from "../../store/contentType";
@@ -72,7 +71,7 @@ function HomeScreen() {
             return <MovieSlider category={item} key={item}/>
           }):
           tv_category.map((item)=>{
-            return <TvSlider category={item} key={item}/>
+            return <MovieSlider category={item} key={item}/>
           })
         }
       </div>

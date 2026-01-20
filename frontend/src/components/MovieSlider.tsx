@@ -23,7 +23,7 @@ function MovieSlider(props: MovieSliderProps) {
       credentials: "include" as RequestCredentials,
     }
     try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/movie/categories/' + props.category, payload);
+      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/' +  contentTypeStore.contentType + '/categories/' + props.category, payload);
       if(response.ok){
         const data = await response.json();
         console.log(data.movies.results)
