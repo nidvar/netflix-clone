@@ -51,11 +51,11 @@ function HomeScreen() {
             <p>{data?.release_date || data?.first_air_date} | {data?.adult? '18+' : '13+'}</p>
             <p>{data?.overview}</p>
             <div className="flex gap-4 font-bold">
-              <Link to='/' className="my-button bg-white black flex gap-2">
+              <Link to={'/watch/' + data?.id} className="my-button bg-white black flex gap-2">
                 <Play className="fill-black"/>
                 Play
               </Link>
-              <Link to={'/watch' + data?.id} className="my-button bg-gray-400/75 flex gap-2">
+              <Link to={'/watch/' + data?.id} className="my-button bg-gray-400/75 flex gap-2">
                 <Info />
                 More Info
               </Link>
