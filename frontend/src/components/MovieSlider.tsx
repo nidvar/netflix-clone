@@ -104,7 +104,7 @@ function MovieSlider(props: MovieSliderProps) {
           {
             showArrows === true?
             <>
-              <ChevronRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollLeft}/>
+              <ChevronRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollRight}/>
             </>:''
           }
         </div>
