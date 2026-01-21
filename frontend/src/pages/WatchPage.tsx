@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useContentTypeStore } from "../store/contentType";
-import type { Trailer } from "../types";
+import type { Trailer, MovieType } from "../types";
 import Navbar from "../components/Navbar";
 
 function WatchPage() {
@@ -14,6 +14,7 @@ function WatchPage() {
 
   const [trailers, setTrailers] = useState<Trailer[]>([]);
   const [currentTrailer, setCurrentTrailer] = useState(0);
+  const [details, setDetails] = useState<MovieType | null>(null);
 
   const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105";
 
@@ -28,6 +29,22 @@ function WatchPage() {
           }
         })
         setTrailers(trailersArray);
+        console.log(trailersArray);
+      }else{
+        console.log('error');
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const grabContentDetails = async ()=>{
+    try {
+      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' + contentTypeStore.contentType + '/details/' + params.id, {credentials: "include" as RequestCredentials});
+      if(response.ok){
+        const data = await response.json();
+        console.log(data.details);
+        setDetails(data.details);
       }else{
         console.log('error');
       }
@@ -54,6 +71,7 @@ function WatchPage() {
 
   useEffect(()=>{
     grabTrailer();
+    grabContentDetails();
   }, [])
 
   return (
@@ -76,6 +94,9 @@ function WatchPage() {
                 src={`https://www.youtube.com/watch?v=${trailers[currentTrailer].key}`}
               />:<div>Loading...</div>
             }
+          </div>
+          <div className="white">
+            <h1>{details?.original_title}</h1>
           </div>
         </div>
       </div>
