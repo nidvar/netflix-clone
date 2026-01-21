@@ -56,14 +56,14 @@ export const login = async (req: Request, res: Response)=>{
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
             sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
-            maxAge: 15 * 60 * 1000,
+            maxAge: 30 * 60 * 1000,
         });
 
         res.cookie('refreshToken-nf-clone', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV !== 'development',
             sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'strict',
-            maxAge: 3* 60 * 60 * 1000,
+            maxAge: 3 * 60 * 60 * 1000,
         });
 
         return res.status(200).json({ message: 'Login successful', user: {
