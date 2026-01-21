@@ -145,14 +145,12 @@ export const logout = async (req: Request, res: Response)=>{
 
 export const refreshTokenEndpoint = async (req: Request, res: Response) => {
     try {
-        const refreshToken = req.cookies['refreshToken-nf-clone'];
+        const refreshToken = req.cookies?.['refreshToken-nf-clone'];
         if(!refreshToken){
             return res.status(401).json({message: 'Unauthorized: No refresh token provided'});
         };
         const decodedRefreshToken = jwt.verify(refreshToken, process.env.REFRESH_JWT_SECRET as string) as JwtPayload;
-        if(!decodedRefreshToken){
-            return res.status(401).json({message: 'Unauthorized: Invalid refresh token'});
-        };
+
         const user = await pool.query(
             'SELECT * FROM users WHERE id = $1',
             [decodedRefreshToken.id]
