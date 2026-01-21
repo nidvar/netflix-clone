@@ -89,8 +89,23 @@ export const useAuthStore = create<AuthStore>((set)=>{
         checkAuth: async function(){
             try {
                 const response = await fetch(backendAPI + "/api/auth/authcheck", {credentials: "include" as RequestCredentials});
-                set({signedIn: response.ok});
-                console.log('Auth check result: ', await response.json());
+                if(!response.ok){
+                    try {
+                        const payload = {
+                            method: 'POST',
+                            credentials: 'include' as RequestCredentials
+                        }
+                        const response = await fetch(backendAPI + "/api/auth/refreshtoken", payload);
+                        set({signedIn: response.ok});
+                        if(!response.ok){
+                            console.log(await response.json())
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
+                }else{
+                    set({signedIn: true});
+                }
             } catch (error) {
                 set({signedIn: false});
                 console.log(error);

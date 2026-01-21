@@ -34,7 +34,6 @@ export const movieTrailer = async (req: Request, res: Response) => {
     const type = req.params.type;
     try {
         const data = await fetchData(`https://api.themoviedb.org/3/${type}/${movieId}/videos?language=en-US`);
-        console.log(data);
         return res.status(200).json({trailers: data});
     } catch (error) {
         console.error('Error in movieTrailer controller:', error);
