@@ -97,8 +97,10 @@ export const useAuthStore = create<AuthStore>((set)=>{
                         }
                         const response = await fetch(backendAPI + "/auth/refreshtoken", payload);
                         set({signedIn: response.ok});
-                        if(!response.ok){
-                            console.log(await response.json())
+                        if(response.ok){
+                            console.log('access token has been refreshed');
+                        }else{
+                            console.log('refresh token failed')
                         }
                     } catch (error) {
                         console.log(error);
