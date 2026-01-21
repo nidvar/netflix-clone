@@ -322,7 +322,7 @@ body {
 
 .trailer-chevron-container {
   display: flex;
-  width: 85%;
+  width: 80%;
   justify-content: space-between;
   margin: 100px auto;
 }
@@ -333,6 +333,19 @@ body {
   width: 40px;
   color: white;
   margin: 0 10px;
+}
+
+.description-container {
+  max-width: 70vw;
+  width: 100%;
+  margin: 100px auto;
+  padding: 15px;
+  color: white;
+  justify-content: space-around;
+}
+
+.description-container img{
+  max-height: 500px;
 }
 
 
@@ -518,6 +531,12 @@ body {
 
   .desktop-hide {
     display: flex;
+  }
+
+  .description-container {
+    margin: 50px auto;
+    justify-content: center;
+    gap: 40px;
   }
 
   /* UTILS */

@@ -72,6 +72,7 @@ function WatchPage() {
   useEffect(()=>{
     grabTrailer();
     grabContentDetails();
+    window.scrollTo(0, 0);
   }, [])
 
   return (
@@ -95,8 +96,16 @@ function WatchPage() {
               />:<div>Loading...</div>
             }
           </div>
-          <div className="white">
-            <h1>{details?.original_title}</h1>
+
+          <div className="description-container flex flex-wrap white">
+            <div className="flex flex-col justify-center gap-2 max-w-xl mb-10">
+              <h1 className="text-5xl font-bold">{details?.original_title || details?.original_name}</h1>
+              <p>{details?.release_date} | {details?.adult? "18+": "PG"}</p>
+              <p>{details?.overview}</p>
+            </div>
+            <div>
+              <img src={'https://image.tmdb.org/t/p/original/' + details?.poster_path} />
+            </div>
           </div>
         </div>
       </div>
