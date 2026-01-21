@@ -24,7 +24,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 })
             };
             try {
-                const response = await fetch(backendAPI + '/api/auth/signup', payload);
+                const response = await fetch(backendAPI + '/auth/signup', payload);
                 if(response.ok){
                     const data = await response.json();
                     set({isLoading: false});
@@ -53,7 +53,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 }),
             };
             try {
-                const response = await fetch(backendAPI + "/api/auth/login", payload);
+                const response = await fetch(backendAPI + "/auth/login", payload);
                 if(response.ok){
                     const data = await response.json();
                     localStorage.setItem('netflixCloneImage', data.user.image);
@@ -77,7 +77,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 credentials: "include" as RequestCredentials
             };
             try {
-                const response = await fetch(backendAPI + "/api/auth/logout", payload);
+                const response = await fetch(backendAPI + "/auth/logout", payload);
                 const data= await response.json();
                 localStorage.setItem('netflixCloneImage', '');
                 set({signedIn: false});
@@ -88,14 +88,14 @@ export const useAuthStore = create<AuthStore>((set)=>{
         },
         checkAuth: async function(){
             try {
-                const response = await fetch(backendAPI + "/api/auth/authcheck", {credentials: "include" as RequestCredentials});
+                const response = await fetch(backendAPI + "/auth/authcheck", {credentials: "include" as RequestCredentials});
                 if(!response.ok){
                     try {
                         const payload = {
                             method: 'POST',
                             credentials: 'include' as RequestCredentials
                         }
-                        const response = await fetch(backendAPI + "/api/auth/refreshtoken", payload);
+                        const response = await fetch(backendAPI + "/auth/refreshtoken", payload);
                         set({signedIn: response.ok});
                         if(!response.ok){
                             console.log(await response.json())

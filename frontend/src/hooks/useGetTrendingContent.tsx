@@ -9,7 +9,7 @@ const useGetTrendingContent = () => {
 
     const grabTrendingContent = async () => {
         try {
-            const response = await fetch(import.meta.env.VITE_BACKEND_API + '/api/movies/' + contentType.contentType + '/trending', {credentials: "include" as RequestCredentials});
+            const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' + contentType.contentType + '/trending', {credentials: "include" as RequestCredentials});
             if(response.ok){
                 const data = await response.json();
                 setTrendingContent(data.movie);
