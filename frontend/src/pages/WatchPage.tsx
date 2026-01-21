@@ -1,27 +1,54 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ReactPlayer from "react-player";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { useContentTypeStore } from "../store/contentType";
+import type { Trailer } from "../types";
 import Navbar from "../components/Navbar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 function WatchPage() {
   const params = useParams();
   const contentTypeStore = useContentTypeStore();
 
-  const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105"
+  const [trailers, setTrailers] = useState<Trailer[]>([]);
+  const [currentTrailer, setCurrentTrailer] = useState(0);
+
+  const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105";
 
   const grabTrailer = async ()=>{
     try {
       const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' + contentTypeStore.contentType + '/trailer/' + params.id, {credentials: "include" as RequestCredentials});
       if(response.ok){
         const data = await response.json();
-        console.log(data);
+        const trailersArray = data.trailers.results.filter((item:any)=>{
+          if(item.type === "Trailer"){
+            return item
+          }
+        })
+        setTrailers(trailersArray);
       }else{
         console.log('error');
       }
     } catch (error) {
       console.log(error);
+    }
+  }
+
+  const nextTrailer = function(){
+    if(currentTrailer === trailers.length-1){
+      return
+    }else{
+      setCurrentTrailer(currentTrailer+1);
+    }
+  }
+
+  const prevTrailer = function(){
+    if(currentTrailer === 0){
+      return
+    }else{
+      setCurrentTrailer(currentTrailer-1);
     }
   }
 
@@ -35,13 +62,22 @@ function WatchPage() {
       <div className="min-h-screen bg-black relative">
         <div className="flex flex-col">
           <div className="trailer-chevron-container">
-            <ChevronLeft size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={function(){}}/>
-            <ChevronRight size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={function(){}}/>
+            <ChevronLeft size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={prevTrailer}/>
+            <ChevronRight size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={nextTrailer}/>
+          </div>
+          <div className="trailer-container">
+            {
+              trailers.length>0?
+              <ReactPlayer
+                controls={true}
+                width={"80%"}
+                height={"70vh"}
+                className='mx-auto overflow-hidden rounded-lg'
+                src={`https://www.youtube.com/watch?v=${trailers[currentTrailer].key}`}
+              />:<div>Loading...</div>
+            }
           </div>
         </div>
-
-
-
       </div>
     </>
   )

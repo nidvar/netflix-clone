@@ -35,3 +35,15 @@ export type MovieType = {
   video: boolean,
   name?:string
 }
+
+export type Trailer = {
+  iso_639_1: string
+  iso_3166_1: string
+  name: string
+  key: string
+  site: number
+  type: string
+  official: boolean,
+  published_at: string
+  id: number
+}
