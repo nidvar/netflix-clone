@@ -356,7 +356,8 @@ body {
   max-width: 150px;
 }
 
-.movie-slider-container {
+.watch-page-slider {
+  position: relative;
   max-width: 80vw;
   margin: auto;
 }

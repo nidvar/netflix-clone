@@ -68,12 +68,12 @@ function MovieSlider(props: MovieSliderProps) {
   }, [props.data]);
 
   return (
-    <div className="slider-section relative white">
+    <div className="relative white">
       <h1 className="white text-xl font-bold">{formatted}</h1>
       <div
         className={
           props.ownData?
-          "slider-container movie-slider-container":
+          "slider-container watch-page-slider":
           "slider-container"
         }
         ref={sliderRef}
@@ -111,7 +111,7 @@ function MovieSlider(props: MovieSliderProps) {
             )
           }):''
         }
-        <div className="scroll-arrow-container right-chevron group">
+      <div className="scroll-arrow-container right-chevron group">
           {
             showArrows === true?
             <>
