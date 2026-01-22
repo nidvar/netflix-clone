@@ -71,8 +71,13 @@ function WatchPage() {
       <div className="min-h-screen bg-black relative">
         <div className="flex flex-col">
           <div className="trailer-chevron-container">
-            <ChevronLeft size={32} className={chevronCSS} strokeWidth={1} onClick={prevTrailer}/>
-            <ChevronRight size={32} className={chevronCSS} strokeWidth={1} onClick={nextTrailer}/>
+            {
+              trailers.length>0?
+              <>
+                <ChevronLeft size={32} className={chevronCSS} strokeWidth={1} onClick={prevTrailer}/>
+                <ChevronRight size={32} className={chevronCSS} strokeWidth={1} onClick={nextTrailer}/>
+              </>:''
+            }
           </div>
           <div className="trailer-container">
             {
@@ -86,21 +91,25 @@ function WatchPage() {
               />:<div>Loading...</div>
             }
           </div>
-
-          <div className="description-container flex flex-wrap white">
-            <div className="flex flex-col justify-center gap-2 max-w-xl mb-10">
-              <h1 className="text-5xl font-bold">{details?.original_title || details?.original_name}</h1>
-              <p>{details?.release_date} | {details?.adult? "18+": "PG"}</p>
-              <p>{details?.overview}</p>
-            </div>
-            <div>
-              <img src={'https://image.tmdb.org/t/p/original/' + details?.poster_path} />
-            </div>
-          </div>
-          <div className="white">
-            <h1 className="text-3xl font-bold movie-slider-container">Similar Movies / TV shows</h1>
-            <MovieSlider category='' ownData={true} data={similarContent}/>
-          </div>
+            {
+              details?
+              <>
+                <div className="description-container flex flex-wrap white">
+                  <div className="flex flex-col justify-center gap-2 max-w-xl mb-10">
+                    <h1 className="text-5xl font-bold">{details?.original_title || details?.original_name}</h1>
+                    <p>{details?.release_date} | {details?.adult? "18+": "PG"}</p>
+                    <p>{details?.overview}</p>
+                  </div>
+                  <div>
+                    <img src={'https://image.tmdb.org/t/p/original/' + details?.poster_path} />
+                  </div>
+                </div>
+                <div className="white">
+                  <h1 className="text-3xl font-bold movie-slider-container">Similar Movies / TV shows</h1>
+                  <MovieSlider category='' ownData={true} data={similarContent}/>
+                </div>
+              </>:<div>Loading...</div>
+            }
         </div>
       </div>
     </>
