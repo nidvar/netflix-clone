@@ -68,14 +68,14 @@ function MovieSlider(props: MovieSliderProps) {
   }, [props.data]);
 
   return (
-    <div className="relative white">
+    <div className={
+      props.ownData?
+      "relative white watch-page-slider":"relative white"
+      }
+    >
       <h1 className="white text-xl font-bold">{formatted}</h1>
       <div
-        className={
-          props.ownData?
-          "slider-container watch-page-slider":
-          "slider-container"
-        }
+        className="slider-container"
         ref={sliderRef}
         onMouseEnter={() => setShowArrows(true)}
         onMouseLeave={() => setShowArrows(false)}

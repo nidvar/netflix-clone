@@ -105,7 +105,7 @@ function WatchPage() {
                   </div>
                 </div>
                 <div className="white">
-                  <h1 className="text-3xl font-bold movie-slider-container">Similar Movies / TV shows</h1>
+                  <h1 className="text-3xl font-bold watch-page-slider">Similar Movies / TV shows</h1>
                   <MovieSlider category='' ownData={true} data={similarContent}/>
                 </div>
               </>:<div>Loading...</div>

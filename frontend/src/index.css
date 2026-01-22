@@ -296,7 +296,7 @@ body {
 }
 
 .scroll-arrow {
-  background-color: black;
+  background-color: grey;
   border-radius: 50%;
   color: white;
   margin: 0 10px;
@@ -353,11 +353,11 @@ body {
 }
 
 .movie-slider-poster img {
+  border-radius: 6px;
   max-width: 150px;
 }
 
 .watch-page-slider {
-  position: relative;
   max-width: 80vw;
   margin: auto;
 }
