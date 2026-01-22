@@ -2,7 +2,7 @@ import { create } from "zustand";
 
 import type { AuthStore } from "../types";
 
-const backendAPI = import.meta.env.VITE_BACKEND_API;
+import { fetchPostRequest, fetchRequest } from "../utils/functions";
 
 export const useAuthStore = create<AuthStore>((set)=>{
     return {
@@ -11,106 +11,47 @@ export const useAuthStore = create<AuthStore>((set)=>{
         signedIn: false,
         signUp: async function(email: string, username: string, password: string){
             set({isLoading: true});
-            const payload = {
-                method: 'POST',
-                credentials: 'include' as RequestCredentials,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                    username: username,
-                    password: password
-                })
-            };
-            try {
-                const response = await fetch(backendAPI + '/auth/signup', payload);
-                if(response.ok){
-                    const data = await response.json();
-                    set({isLoading: false});
-                    return data.message;
-                }else{
-                    const errData = await response.json();
-                    set({isLoading: false});
-                    return errData.message;
-                }
-            } catch (error) {
-                set({isLoading: false});
-                return 'Sign Up Error';
+            const body = {
+                email: email,
+                username: username,
+                password: password
             }
+            const res = await fetchPostRequest('/auth/signup', body);
+            set({isLoading: false});
+            return res.message;
         },
         login: async function(email: string, password: string){
             set({isLoading: true});
-            const payload = {
-                method: "POST",
-                credentials: "include" as RequestCredentials,
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: email,
-                    password: password
-                }),
-            };
-            try {
-                const response = await fetch(backendAPI + "/auth/login", payload);
-                if(response.ok){
-                    const data = await response.json();
-                    localStorage.setItem('netflixCloneImage', data.user.image);
-                    set({signedIn: true});
-                    set({isLoading: false});
-                    return data.message;
-                }else{
-                    const errData = await response.json();
-                    set({isLoading: false});
-                    return errData.message;
-                }
-            } catch (error) {
-                console.log(error);
-                set({isLoading: false});
-                return 'Login Error';
+            const body = {
+                email: email,
+                password: password
             }
+            const res = await fetchPostRequest('/auth/login', body);
+            set({isLoading: false});
+            return res.message;
         },
         logout: async function(){
-            const payload = {
-                method: "POST",
-                credentials: "include" as RequestCredentials
-            };
             try {
-                const response = await fetch(backendAPI + "/auth/logout", payload);
-                const data= await response.json();
+                await fetchPostRequest("/auth/logout");
                 localStorage.setItem('netflixCloneImage', '');
                 set({signedIn: false});
-                console.log(data);
             } catch (error) {
                 console.log(error);
             }
         },
         checkAuth: async function(){
-            try {
-                const response = await fetch(backendAPI + "/auth/authcheck", {credentials: "include" as RequestCredentials});
-                if(!response.ok){
-                    try {
-                        const payload = {
-                            method: 'POST',
-                            credentials: 'include' as RequestCredentials
-                        }
-                        const response = await fetch(backendAPI + "/auth/refreshtoken", payload);
-                        set({signedIn: response.ok});
-                        if(response.ok){
-                            console.log('access token has been refreshed');
-                        }else{
-                            console.log('refresh token failed')
-                        }
-                    } catch (error) {
-                        console.log(error);
-                    }
-                }else{
+            const res = await fetchRequest('/auth/authcheck');
+            if(res.message === 'Authorized'){
+                set({signedIn: true});
+                return;
+            }else{
+                const res = await fetchPostRequest('/auth/refreshtoken');
+                console.log(res.message);
+                if(res.message === 'access token refreshed'){
                     set({signedIn: true});
+                }else{
+                    set({signedIn: false});
                 }
-            } catch (error) {
-                set({signedIn: false});
-                console.log(error);
             }
         }
     }

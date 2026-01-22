@@ -1,12 +1,14 @@
+// external imports
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player";
-
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
+// local imports
 import { useContentTypeStore } from "../store/contentType";
 import type { Trailer, MovieType } from "../types";
 import Navbar from "../components/Navbar";
+import { fetchRequest } from "../utils/functions";
 
 function WatchPage() {
   const params = useParams();
@@ -19,39 +21,23 @@ function WatchPage() {
   const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105";
 
   const grabTrailer = async ()=>{
-    try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' + contentTypeStore.contentType + '/trailer/' + params.id, {credentials: "include" as RequestCredentials});
-      if(response.ok){
-        const data = await response.json();
-        const trailersArray = data.trailers.results.filter((item:any)=>{
-          if(item.type === "Trailer"){
-            return item
-          }
-        })
-        setTrailers(trailersArray);
-        console.log(trailersArray);
-      }else{
-        console.log('error');
+    const data = await fetchRequest('/movies/' + contentTypeStore.contentType + '/trailer/' + params.id)
+    const trailersArray = data.trailers.results.filter((item:any)=>{
+      if(item.type === "Trailer"){
+        return item
       }
-    } catch (error) {
-      console.log(error);
-    }
+    })
+    setTrailers(trailersArray);
   };
 
   const grabContentDetails = async ()=>{
-    try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' + contentTypeStore.contentType + '/details/' + params.id, {credentials: "include" as RequestCredentials});
-      if(response.ok){
-        const data = await response.json();
-        console.log(data.details);
-        setDetails(data.details);
-      }else{
-        console.log('error');
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    const data = await fetchRequest('/movies/' + contentTypeStore.contentType + '/details/' + params.id);
+    setDetails(data.details);
   }
+
+  const getSimilarContent = async ()=>{
+    const data = await fetchRequest('/movies/' + contentTypeStore.contentType + '/similar/' + params.id);
+  };
 
   const nextTrailer = function(){
     if(currentTrailer === trailers.length-1){
@@ -72,6 +58,7 @@ function WatchPage() {
   useEffect(()=>{
     grabTrailer();
     grabContentDetails();
+    getSimilarContent();
     window.scrollTo(0, 0);
   }, [])
 
@@ -106,6 +93,9 @@ function WatchPage() {
             <div>
               <img src={'https://image.tmdb.org/t/p/original/' + details?.poster_path} />
             </div>
+          </div>
+          <div>
+            <h1 className="text-3xl font-bold">More like this</h1>
           </div>
         </div>
       </div>

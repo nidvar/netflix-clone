@@ -48,3 +48,9 @@ export type Trailer = {
   published_at: string
   id: number
 }
+
+export type Body = {
+  email: string
+  password: string
+  username?: string
+}
