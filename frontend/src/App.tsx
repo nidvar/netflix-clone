@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { useAuthStore } from './store/authUser'
@@ -13,14 +13,11 @@ import AuthScreen from './pages/home/AuthScreen'
 function App() {
 
   const [loading, setLoading] = useState(true);
-  const hasRefreshed = useRef(false);
 
   const authStore = useAuthStore();
   const signedIn = authStore.signedIn;
   
   useEffect(()=>{
-    if(hasRefreshed.current) return;
-    hasRefreshed.current = true;
     authStore.checkAuth().finally(()=>{setLoading(false)});
   }, []);
   

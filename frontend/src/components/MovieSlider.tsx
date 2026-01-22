@@ -18,7 +18,6 @@ function MovieSlider(props: MovieSliderProps) {
   const navigate = useNavigate();
 
   const sliderRef = useRef<HTMLDivElement>(null);
-  const hasRefreshed = useRef(false);
 
   const formatting = props.category.replaceAll("_", " ");
   const formatted = formatting.charAt(0).toUpperCase() + formatting.slice(1);
@@ -57,8 +56,6 @@ function MovieSlider(props: MovieSliderProps) {
   };
 
   useEffect(()=>{
-    if(hasRefreshed.current) return;
-    hasRefreshed.current = true;
     if(!props.ownData){
       grabData();
     }
