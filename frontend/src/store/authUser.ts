@@ -49,6 +49,7 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 console.log(res.message);
                 if(res.message === 'access token refreshed'){
                     set({signedIn: true});
+                    window.location.reload();
                 }else{
                     set({signedIn: false});
                 }

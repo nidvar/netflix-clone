@@ -348,6 +348,19 @@ body {
   max-height: 500px;
 }
 
+.movie-slider-poster {
+  width: 250px;
+}
+
+.movie-slider-poster img {
+  max-width: 150px;
+}
+
+.movie-slider-container {
+  max-width: 80vw;
+  margin: auto;
+}
+
 
 /* UTILS ===============================================================================*/
 /* UTILS ===============================================================================*/

@@ -9,6 +9,7 @@ import { useContentTypeStore } from "../store/contentType";
 import type { Trailer, MovieType } from "../types";
 import Navbar from "../components/Navbar";
 import { fetchRequest } from "../utils/functions";
+import MovieSlider from "../components/MovieSlider";
 
 function WatchPage() {
   const params = useParams();
@@ -17,6 +18,7 @@ function WatchPage() {
   const [trailers, setTrailers] = useState<Trailer[]>([]);
   const [currentTrailer, setCurrentTrailer] = useState(0);
   const [details, setDetails] = useState<MovieType | null>(null);
+  const [similarContent, setSimilarContent] = useState<MovieType[]>([]);
 
   const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105";
 
@@ -37,6 +39,7 @@ function WatchPage() {
 
   const getSimilarContent = async ()=>{
     const data = await fetchRequest('/movies/' + contentTypeStore.contentType + '/similar/' + params.id);
+    setSimilarContent(data.details.results);
   };
 
   const nextTrailer = function(){
@@ -94,8 +97,9 @@ function WatchPage() {
               <img src={'https://image.tmdb.org/t/p/original/' + details?.poster_path} />
             </div>
           </div>
-          <div>
-            <h1 className="text-3xl font-bold">More like this</h1>
+          <div className="white">
+            <h1 className="text-3xl font-bold movie-slider-container">More {contentTypeStore.contentType}s like this</h1>
+            <MovieSlider category='' ownData={true} data={similarContent}/>
           </div>
         </div>
       </div>

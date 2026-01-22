@@ -6,6 +6,7 @@ import { ChevronRight, ChevronLeft  } from "lucide-react";
 import { useContentTypeStore } from "../store/contentType";
 
 import type { MovieSliderProps, MovieType } from "../types";
+import { fetchRequest } from "../utils/functions";
 
 function MovieSlider(props: MovieSliderProps) {
 
@@ -21,6 +22,8 @@ function MovieSlider(props: MovieSliderProps) {
   const formatting = props.category.replaceAll("_", " ");
   const formatted = formatting.charAt(0).toUpperCase() + formatting.slice(1);
 
+  const imageSrc = "https://image.tmdb.org/t/p/w500";
+
   const cssPropertiesArrows = {
     size: 42,
     strokeWidth: 0.5,
@@ -28,20 +31,9 @@ function MovieSlider(props: MovieSliderProps) {
   }
 
   const grabData = async ()=>{
-    const payload = {
-      method: 'GET',
-      credentials: "include" as RequestCredentials,
-    }
-    try {
-      const response = await fetch(import.meta.env.VITE_BACKEND_API + '/movies/' +  contentTypeStore.contentType + '/categories/' + props.category, payload);
-      if(response.ok){
-        const data = await response.json();
-        setData(data.movies.results);
-      }else{
-        console.log(response);
-      }
-    } catch (error) {
-      console.log(error);
+    const data = await fetchRequest('/movies/' +  contentTypeStore.contentType + '/categories/' + props.category);
+    if(data.movies.results){
+      setData(data.movies.results);
     }
   };
 
@@ -64,14 +56,26 @@ function MovieSlider(props: MovieSliderProps) {
   };
 
   useEffect(()=>{
-    grabData();
+    if(!props.ownData){
+      grabData();
+    }
   }, [contentTypeStore.contentType]);
+
+  useEffect(()=>{
+    if(props.data && props.data.length > 0){
+      setData(props.data);
+    }
+  }, [props.data]);
 
   return (
     <div className="slider-section relative white">
       <h1 className="white text-xl font-bold">{formatted}</h1>
       <div
-        className="slider-container" 
+        className={
+          props.ownData?
+          "slider-container movie-slider-container":
+          "slider-container"
+        }
         ref={sliderRef}
         onMouseEnter={() => setShowArrows(true)}
         onMouseLeave={() => setShowArrows(false)}
@@ -88,11 +92,18 @@ function MovieSlider(props: MovieSliderProps) {
           data.length > 0?
           data.map((item)=>{
             return (
-              <div className="slider-item hand-hover group flex flex-col gap-2" key={item.id}>
+              <div 
+                className={
+                  props.ownData? 
+                  "hand-hover group flex flex-col gap-2 movie-slider-poster":
+                  "slider-item hand-hover group flex flex-col gap-2"
+                } 
+                key={item.id}
+              >
                 <img
                   alt="Movie image"
-                  src={"https://image.tmdb.org/t/p/w500" + item.backdrop_path}
-                  className="transition-transform duration-300 ease-in-out group-hover:scale-105"
+                  src={props.ownData? imageSrc + item.poster_path:  imageSrc + item.backdrop_path}
+                  className={"transition-transform duration-300 ease-in-out group-hover:scale-105"}
                   onClick={function(){navigate("/watch/" + item.id)}}
                 />
                 <p className="center">{item.title? item.title: item.name}</p>

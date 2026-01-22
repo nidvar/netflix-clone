@@ -3,12 +3,11 @@ import type { Body } from "../types";
 export const fetchRequest = async (url: string)=>{
     try {
         const response = await fetch(import.meta.env.VITE_BACKEND_API + url, {credentials: "include" as RequestCredentials})
+        const data = await response.json();
+        console.log(data, url);
         if(response.ok){
-            const data = await response.json();
-            console.log(data, url);
             return data;
         }else{
-            console.log('error', url);
             return 'error' + url;
         }
     } catch (error) {

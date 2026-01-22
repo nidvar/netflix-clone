@@ -15,6 +15,8 @@ export type ContentTypeStore = {
 
 export type MovieSliderProps = {
   category: string
+  ownData?: boolean
+  data?: MovieType[]
 }
 
 export type TvSliderProps = {
