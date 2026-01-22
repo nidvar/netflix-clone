@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
-import { useAuthStore } from "../../store/authUser";
+// import { useEffect, useRef } from "react";
+// import { useAuthStore } from "../../store/authUser";
 
-import AuthScreen from "./AuthScreen";
-import HomeScreen from "./HomeScreen";
+// import AuthScreen from "./AuthScreen";
+// import HomeScreen from "./HomeScreen";
 
-function HomePage() {
+// function HomePage() {
 
-  const authStore = useAuthStore();
-  const signedIn = authStore.signedIn;
+//   const authStore = useAuthStore();
+//   const signedIn = authStore.signedIn;
 
-  useEffect(()=>{
-    authStore.checkAuth();
-  }, []);
+//   useEffect(()=>{
+//     authStore.checkAuth();
+//   }, []);
 
-  return (
-    <>
-      {signedIn? <HomeScreen />: <AuthScreen />}
-    </>
-  );
-}
+//   return (
+//     <>
+//       {signedIn? <HomeScreen />: <AuthScreen />}
+//     </>
+//   );
+// }
 
-export default HomePage;
+// export default HomePage;

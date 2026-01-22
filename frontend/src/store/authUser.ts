@@ -27,6 +27,9 @@ export const useAuthStore = create<AuthStore>((set)=>{
                 password: password
             }
             const res = await fetchPostRequest('/auth/login', body);
+            if(res.message === 'Login successful'){
+                set({signedIn: true});
+            }
             set({isLoading: false});
             return res.message;
         },

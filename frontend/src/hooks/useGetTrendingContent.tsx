@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { useContentTypeStore } from "../store/contentType";
 import { fetchRequest } from "../utils/functions";
 
 const useGetTrendingContent = () => {
+
+    const hasFetched = useRef(false);
+
     const contentType = useContentTypeStore();
 
     const [trendingContent, setTrendingContent] = useState<any>(null);
@@ -16,6 +19,8 @@ const useGetTrendingContent = () => {
     }
 
     useEffect(() => {
+        if(hasFetched.current) return;
+        hasFetched.current = true;
         grabTrendingContent();
     }, [contentType.contentType]);
 

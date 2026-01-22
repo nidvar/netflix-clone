@@ -1,22 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { useAuthStore } from './store/authUser'
 
-import HomePage from './pages/home/HomePage'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import Footer from './components/Footer'
 import WatchPage from './pages/WatchPage'
+import HomeScreen from './pages/home/HomeScreen'
+import AuthScreen from './pages/home/AuthScreen'
 
 function App() {
 
   const [loading, setLoading] = useState(true);
+  const hasRefreshed = useRef(false);
 
   const authStore = useAuthStore();
   const signedIn = authStore.signedIn;
   
   useEffect(()=>{
+    if(hasRefreshed.current) return;
+    hasRefreshed.current = true;
     authStore.checkAuth().finally(()=>{setLoading(false)});
   }, []);
   
@@ -32,11 +36,11 @@ function App() {
           </div>:
           <>
             <Routes>
-              <Route path='/' element={<HomePage />} />
+              <Route path='/' element={signedIn? <HomeScreen />: <AuthScreen />} />
               <Route path='/login' element={!signedIn?<LoginPage />: <Navigate to="/" />} />
               <Route path='/signup' element={!signedIn?<SignUpPage />: <Navigate to="/" />} />
               <Route path='/watch/:id' element={signedIn?<WatchPage />: <Navigate to="/login" />} />
-              <Route path='*' element={<HomePage />} />
+              <Route path='*' element={signedIn? <HomeScreen />: <AuthScreen />} />
             </Routes>
           </>
         }

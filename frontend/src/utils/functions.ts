@@ -6,7 +6,7 @@ export const fetchRequest = async (url: string)=>{
         const data = await response.json();
         console.log(data, url);
         if(data.message === 'Unauthorized: No token provided'){
-            window.location.reload();
+            console.log(data);
         }
         return data;
     } catch (error) {
