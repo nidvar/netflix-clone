@@ -20,13 +20,13 @@ function WatchPage() {
   const [details, setDetails] = useState<MovieType | null>(null);
   const [similarContent, setSimilarContent] = useState<MovieType[]>([]);
 
-  const chevCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105";
+  const chevronCSS = "hand-hover transition-transform duration-300 ease-in-out group-hover:scale-105 trailer-chevron";
 
   const grabTrailer = async ()=>{
     const data = await fetchRequest('/movies/' + contentTypeStore.contentType + '/trailer/' + params.id)
     const trailersArray = data.trailers.results.filter((item:any)=>{
-      if(item.type === "Trailer"){
-        return item
+      if(item.type === "Trailer" || item.type === "Clip"){
+        return item;
       }
     })
     setTrailers(trailersArray);
@@ -71,8 +71,8 @@ function WatchPage() {
       <div className="min-h-screen bg-black relative">
         <div className="flex flex-col">
           <div className="trailer-chevron-container">
-            <ChevronLeft size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={prevTrailer}/>
-            <ChevronRight size={32} className={chevCSS + ' trailer-chevron'} strokeWidth={1} onClick={nextTrailer}/>
+            <ChevronLeft size={32} className={chevronCSS} strokeWidth={1} onClick={prevTrailer}/>
+            <ChevronRight size={32} className={chevronCSS} strokeWidth={1} onClick={nextTrailer}/>
           </div>
           <div className="trailer-container">
             {
@@ -98,7 +98,7 @@ function WatchPage() {
             </div>
           </div>
           <div className="white">
-            <h1 className="text-3xl font-bold movie-slider-container">More {contentTypeStore.contentType}s like this</h1>
+            <h1 className="text-3xl font-bold movie-slider-container">Similar Movies / TV shows</h1>
             <MovieSlider category='' ownData={true} data={similarContent}/>
           </div>
         </div>
