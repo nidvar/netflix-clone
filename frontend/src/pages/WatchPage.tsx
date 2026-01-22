@@ -63,7 +63,7 @@ function WatchPage() {
     grabContentDetails();
     getSimilarContent();
     window.scrollTo(0, 0);
-  }, [])
+  }, [params.id])
 
   return (
     <>

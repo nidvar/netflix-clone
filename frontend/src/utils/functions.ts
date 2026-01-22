@@ -5,11 +5,10 @@ export const fetchRequest = async (url: string)=>{
         const response = await fetch(import.meta.env.VITE_BACKEND_API + url, {credentials: "include" as RequestCredentials})
         const data = await response.json();
         console.log(data, url);
-        if(response.ok){
-            return data;
-        }else{
-            return 'error' + url;
+        if(data.message === 'Unauthorized: No token provided'){
+            window.location.reload();
         }
+        return data;
     } catch (error) {
         console.log(error);
         return 'server error' 
