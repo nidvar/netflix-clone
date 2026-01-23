@@ -1,18 +1,34 @@
-import { useEffect, useRef, useState, type MouseEvent } from "react";
-
+import { useEffect, useRef, useState } from "react";
 import { LogOut, Menu, Search } from "lucide-react";
 import { Link } from 'react-router-dom';
+
 import { useAuthStore } from "../store/authUser";
 import { useContentTypeStore } from "../store/contentType";
+import { useSearchResultsStore } from "../store/searchResults";
 
 function Navbar() {
   const authStore = useAuthStore();
   const contentType = useContentTypeStore();
+  const searchStore = useSearchResultsStore();
 
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const searchRef = useRef<HTMLDivElement>(null);
+
+  const searchContent = function(e: React.ChangeEvent<HTMLInputElement>){
+    searchStore.startSearching();
+    const value = e.target.value;
+    setSearchValue(value);
+    clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(()=>{
+      console.log('api call', value);
+    }, 800);
+  };
 
   const openSearch = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
@@ -34,6 +50,16 @@ function Navbar() {
     return cleanup
   }, [])
 
+  useEffect(()=>{
+    if(inputRef.current) inputRef.current.focus();
+  }, [showSearch])
+
+  useEffect(()=>{
+    if(searchValue === ''){
+      searchStore.stopSearching();
+    }
+  }, [searchValue])
+
   return (
     <>
       <div className="header white" ref={searchRef}>
@@ -51,7 +77,7 @@ function Navbar() {
           <div className="flex center gap-3">
             {
               showSearch === true?
-              <input className="search-input"/>:
+              <input ref={inputRef} className="search-input" value={searchValue} onChange={function(e){searchContent(e)}}/>:
               <Search id="search-icon" className="hand-hover" onClick={function(e){openSearch(e)}}/>
             }
             <img src="/avatar1.png" className="hand-hover profile-image" />
