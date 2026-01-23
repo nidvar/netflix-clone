@@ -5,22 +5,22 @@ import { fetchRequest } from "../utils/functions";
 
 const useGetTrendingContent = () => {
 
-    const contentType = useContentTypeStore();
+  const contentType = useContentTypeStore();
 
-    const [trendingContent, setTrendingContent] = useState<any>(null);
+  const [trendingContent, setTrendingContent] = useState<any>(null);
 
-    const grabTrendingContent = async () => {
-        const data = await fetchRequest('/movies/' + contentType.contentType + '/trending')
-        if(data.movie){
-            setTrendingContent(data.movie);
-        }
+  const grabTrendingContent = async () => {
+    const data = await fetchRequest('/movies/' + contentType.contentType + '/trending')
+    if (data.movie) {
+      setTrendingContent(data.movie);
     }
+  }
 
-    useEffect(() => {
-        grabTrendingContent();
-    }, [contentType.contentType]);
+  useEffect(() => {
+    grabTrendingContent();
+  }, [contentType.contentType]);
 
-    return trendingContent;
+  return trendingContent;
 };
 
 export default useGetTrendingContent;

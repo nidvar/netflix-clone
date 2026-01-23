@@ -15,8 +15,8 @@ export type ContentTypeStore = {
 
 export type SearchStoreType = {
   searching: boolean;
-  searchResults: MovieType[];
-  setSearchResults: (results: MovieType[]) => void;
+  searchResults: SearchResultType[];
+  setSearchResults: (results: SearchResultType[]) => void;
   startSearching: () => void;
   stopSearching: () => void;
 }
@@ -46,6 +46,20 @@ export type MovieType = {
   video: boolean,
   name?:string
 }
+
+export type PeopleType = {
+  adult: boolean,
+  gender: number,
+  id: number,
+  known_for_department: string,
+  name: string,
+  original_name: string,
+  popularity: number,
+  profile_path: string | null,
+  known_for: MovieType[]
+}
+
+export type SearchResultType = MovieType | PeopleType
 
 export type Trailer = {
   iso_639_1: string

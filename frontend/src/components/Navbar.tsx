@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { useAuthStore } from "../store/authUser";
 import { useContentTypeStore } from "../store/contentType";
 import { useSearchResultsStore } from "../store/searchResults";
+import { fetchRequest } from "../utils/functions";
+import type { MovieType, PeopleType, SearchResultType } from "../types";
 
 function Navbar() {
   const authStore = useAuthStore();
@@ -20,13 +22,41 @@ function Navbar() {
 
   const searchRef = useRef<HTMLDivElement>(null);
 
+  const searchAPI = async function(value: string){
+    const movies = await fetchRequest('/search/movies/' + value);
+    const shows = await fetchRequest('/search/tv/' + value);
+    const people = await fetchRequest('/search/person/' + value);
+
+    const results:SearchResultType[] = [];
+
+    movies.movies.forEach((item: MovieType, index: number)=>{
+      if(index && index < 6){
+        results.push(item);
+      }
+    });
+    shows.tvshows.forEach((item: MovieType, index: number)=>{
+      if(index && index < 6){
+        results.push(item);
+      }
+    });
+    people.people.forEach((item: PeopleType, index: number)=>{
+      if(index && index < 6){
+        results.push(item);
+      }
+    });
+    
+    searchStore.setSearchResults(results);
+    console.log(results);
+  }
+
   const searchContent = function(e: React.ChangeEvent<HTMLInputElement>){
     searchStore.startSearching();
     const value = e.target.value;
     setSearchValue(value);
     clearTimeout(timerRef.current);
+
     timerRef.current = setTimeout(()=>{
-      console.log('api call', value);
+      searchAPI(value);
     }, 800);
   };
 

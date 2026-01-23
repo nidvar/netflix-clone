@@ -4,8 +4,6 @@ import { useSearchResultsStore } from '../store/searchResults';
 
 function SearchResults() {
   const searchStore = useSearchResultsStore();
-  console.log(searchStore)
-
   useEffect(()=>{
   }, []);
 
