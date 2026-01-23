@@ -91,6 +91,9 @@ function MovieSlider(props: MovieSliderProps) {
         {
           data.length > 0?
           data.map((item)=>{
+            if(item.backdrop_path === null && item.poster_path === null){
+              return;
+            }
             return (
               <div 
                 className={

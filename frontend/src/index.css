@@ -72,6 +72,11 @@ body {
   gap: 15px;
 }
 
+.search-input {
+  background-color: black;
+  border: 2px solid grey;
+}
+
 /* FOOTER */
 .footer {
   padding: 20px;
@@ -385,6 +390,7 @@ body {
 
 .hand-hover {
   cursor: pointer;
+  user-select: none;
 }
 
 .loading-message {
