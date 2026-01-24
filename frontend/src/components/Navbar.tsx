@@ -23,30 +23,34 @@ function Navbar() {
   const searchRef = useRef<HTMLDivElement>(null);
 
   const searchAPI = async function(value: string){
-    const movies = await fetchRequest('/search/movies/' + value);
-    const shows = await fetchRequest('/search/tv/' + value);
-    const people = await fetchRequest('/search/person/' + value);
 
-    const results:SearchResultType[] = [];
+    searchStore.setMovies([]);
+    searchStore.setTvshows([]);
+    searchStore.setPeople([]);
 
-    movies.movies.forEach((item: MovieType, index: number)=>{
-      if(index && index < 6){
-        results.push(item);
-      }
-    });
-    shows.tvshows.forEach((item: MovieType, index: number)=>{
-      if(index && index < 6){
-        results.push(item);
-      }
-    });
-    people.people.forEach((item: PeopleType, index: number)=>{
-      if(index && index < 6){
-        results.push(item);
-      }
-    });
-    
-    searchStore.setSearchResults(results);
-    console.log(results);
+    if(value === '') {
+      searchStore.setMovies([]);
+      searchStore.setTvshows([]);
+      searchStore.setPeople([]);
+      searchStore.stopSearching();
+      return;
+    };
+
+    searchStore.startSearching();
+
+    try {
+      const results = await Promise.all([
+        fetchRequest('/search/movies/' + value),
+        fetchRequest('/search/tv/' + value),
+        fetchRequest('/search/person/' + value)
+      ]);
+      searchStore.setMovies(results[0]);
+      searchStore.setTvshows(results[1]);
+      searchStore.setPeople(results[2]);
+    } catch (error) {
+      console.log(error);
+    }
+
   }
 
   const searchContent = function(e: React.ChangeEvent<HTMLInputElement>){
@@ -82,13 +86,7 @@ function Navbar() {
 
   useEffect(()=>{
     if(inputRef.current) inputRef.current.focus();
-  }, [showSearch])
-
-  useEffect(()=>{
-    if(searchValue === ''){
-      searchStore.stopSearching();
-    }
-  }, [searchValue])
+  }, [showSearch]);
 
   return (
     <>
