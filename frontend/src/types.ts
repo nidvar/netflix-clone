@@ -15,8 +15,12 @@ export type ContentTypeStore = {
 
 export type SearchStoreType = {
   searching: boolean;
-  searchResults: SearchResultType[];
-  setSearchResults: (results: SearchResultType[]) => void;
+  movies: SearchResultType[];
+  tvshows: SearchResultType[];
+  people: SearchResultType[];
+  setMovies: (results: SearchResultType[]) => void;
+  setTvshows: (results: SearchResultType[]) => void;
+  setPeople: (results: SearchResultType[]) => void;
   startSearching: () => void;
   stopSearching: () => void;
 }
