@@ -7,7 +7,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // local imports
 import { useContentTypeStore } from "../store/contentTypeStore";
 import type { Trailer, MovieType } from "../types";
-import Navbar from "../components/Navbar";
+
 import { fetchRequest } from "../utils/functions";
 import MovieSlider from "../components/MovieSlider";
 
@@ -67,7 +67,6 @@ function WatchPage() {
 
   return (
     <>
-      <Navbar />
       <div className="min-h-screen bg-black relative">
         <div className="flex flex-col">
               <div className="trailer-chevron-container">
