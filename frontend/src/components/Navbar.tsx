@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { LogOut, Menu, Search } from "lucide-react";
 import { Link } from 'react-router-dom';
 
-import { useAuthStore } from "../store/authUser";
-import { useContentTypeStore } from "../store/contentType";
-import { useSearchResultsStore } from "../store/searchResults";
+import { useAuthStore } from "../store/authUserStore";
+import { useContentTypeStore } from "../store/contentTypeStore";
+import { useSearchResultsStore } from "../store/searchResultsStore";
 import { fetchRequest } from "../utils/functions";
 import type { MovieType, PeopleType, SearchResultType } from "../types";
 

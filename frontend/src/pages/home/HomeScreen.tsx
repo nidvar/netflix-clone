@@ -7,8 +7,8 @@ import Navbar from "../../components/Navbar";
 import MovieSlider from "../../components/MovieSlider";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 
-import {useContentTypeStore} from "../../store/contentType";
-import {useSearchResultsStore} from "../../store/searchResults";
+import {useContentTypeStore} from "../../store/contentTypeStore";
+import {useSearchResultsStore} from "../../store/searchResultsStore";
 import SearchResults from "../../components/SearchResults";
 
 function HomeScreen() {

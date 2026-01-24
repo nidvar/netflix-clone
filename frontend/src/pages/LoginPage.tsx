@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { useAuthStore } from "../store/authUser";
+import { useAuthStore } from "../store/authUserStore";
 
 function LoginPage() {
 

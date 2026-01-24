@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import { ChevronRight, ChevronLeft  } from "lucide-react";
 
-import { useContentTypeStore } from "../store/contentType";
+import { useContentTypeStore } from "../store/contentTypeStore";
 
 import type { MovieSliderProps, MovieType } from "../types";
 import { fetchRequest } from "../utils/functions";

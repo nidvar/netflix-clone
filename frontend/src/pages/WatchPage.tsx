@@ -5,8 +5,8 @@ import ReactPlayer from "react-player";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // local imports
-import { useContentTypeStore } from "../store/contentType";
-import { useSearchResultsStore } from "../store/searchResults";
+import { useContentTypeStore } from "../store/contentTypeStore";
+import { useSearchResultsStore } from "../store/searchResultsStore";
 
 import type { Trailer, MovieType } from "../types";
 import Navbar from "../components/Navbar";

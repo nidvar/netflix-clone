@@ -75,6 +75,7 @@ body {
 .search-input {
   background-color: black;
   border: 2px solid grey;
+  padding: 2px 4px;
 }
 
 /* FOOTER */
@@ -268,6 +269,22 @@ body {
 .movie-info {
   max-width: 600px;
   width: 90%;
+}
+
+/* SEARCH RESULTS ===============================================================================*/
+/* SEARCH RESULTS ===============================================================================*/
+/* SEARCH RESULTS ===============================================================================*/
+
+.search-results-container {
+  border: 1px solid red;
+  max-width: 80vw;
+  margin: 100px auto;
+  gap: 10px;
+}
+
+.search-results-container img {
+  border-radius: 6px;
+  max-width: 300px;
 }
 
 /* SLIDER ITEM ===============================================================================*/

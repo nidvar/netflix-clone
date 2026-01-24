@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { useAuthStore } from './store/authUser'
+import { useAuthStore } from './store/authUserStore'
 
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'

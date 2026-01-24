@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { useContentTypeStore } from "../store/contentType";
+import { useContentTypeStore } from "../store/contentTypeStore";
 import { fetchRequest } from "../utils/functions";
 
 const useGetTrendingContent = () => {

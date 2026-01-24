@@ -1,7 +1,7 @@
 import { useState, type FormEvent, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
-import { useAuthStore } from "../store/authUser";
+import { useAuthStore } from "../store/authUserStore";
 
 function SignUpPage() {
 
