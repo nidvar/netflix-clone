@@ -8,8 +8,6 @@ import MovieSlider from "../../components/MovieSlider";
 import useGetTrendingContent from "../../hooks/useGetTrendingContent";
 
 import {useContentTypeStore} from "../../store/contentTypeStore";
-import {useSearchResultsStore} from "../../store/searchResultsStore";
-import SearchResults from "../../components/SearchResults";
 
 function HomeScreen() {
 
@@ -32,7 +30,6 @@ function HomeScreen() {
   const [data, setData] = useState<any>(myData);
 
   const contentTypeStore = useContentTypeStore();
-  const searchResultsStore = useSearchResultsStore();
   const trendingData = useGetTrendingContent();
 
   useEffect(()=>{
@@ -42,11 +39,6 @@ function HomeScreen() {
   return (
     <>
       <Navbar />
-      {
-        searchResultsStore.searching === true?
-        <div className="relative h-screen">
-          <SearchResults />
-        </div>:
         <>
           <img 
             src={
@@ -89,7 +81,6 @@ function HomeScreen() {
             }
           </div>
         </>
-      }
     </>
   )
 }

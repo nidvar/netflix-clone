@@ -6,18 +6,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // local imports
 import { useContentTypeStore } from "../store/contentTypeStore";
-import { useSearchResultsStore } from "../store/searchResultsStore";
-
 import type { Trailer, MovieType } from "../types";
 import Navbar from "../components/Navbar";
 import { fetchRequest } from "../utils/functions";
 import MovieSlider from "../components/MovieSlider";
-import SearchResults from "../components/SearchResults";
 
 function WatchPage() {
   const params = useParams();
   const contentTypeStore = useContentTypeStore();
-  const searchResultsStore = useSearchResultsStore();
 
   const [trailers, setTrailers] = useState<Trailer[]>([]);
   const [currentTrailer, setCurrentTrailer] = useState(0);
@@ -74,10 +70,6 @@ function WatchPage() {
       <Navbar />
       <div className="min-h-screen bg-black relative">
         <div className="flex flex-col">
-          {
-            searchResultsStore.searching === true?
-            <SearchResults />:
-            <>
               <div className="trailer-chevron-container">
                 {
                   trailers.length>0?
@@ -118,8 +110,6 @@ function WatchPage() {
                     </div>
                   </>:<div>Loading...</div>
                 }
-            </>
-          }
         </div>
       </div>
     </>
