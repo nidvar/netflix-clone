@@ -1,72 +1,72 @@
 import { useEffect, useRef, useState } from "react";
 import { LogOut, Menu, Search } from "lucide-react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthStore } from "../store/authUserStore";
 import { useContentTypeStore } from "../store/contentTypeStore";
 import { useSearchResultsStore } from "../store/searchResultsStore";
 import { fetchRequest } from "../utils/functions";
-import type { MovieType, PeopleType, SearchResultType } from "../types";
 
 function Navbar() {
   const authStore = useAuthStore();
   const contentType = useContentTypeStore();
   const searchStore = useSearchResultsStore();
 
+  const navigate = useNavigate();
+
   const [showMenu, setShowMenu] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+
+  const [inputValue, setInputValue] = useState('');
 
   const timerRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const searchRef = useRef<HTMLDivElement>(null);
 
-  const searchAPI = async function(value: string){
-
+  const clearSearchResults = function(){
     searchStore.setMovies([]);
     searchStore.setTvshows([]);
     searchStore.setPeople([]);
+  }
 
-    if(value === '') {
-      searchStore.setMovies([]);
-      searchStore.setTvshows([]);
-      searchStore.setPeople([]);
-      searchStore.stopSearching();
-      return;
-    };
-
-    searchStore.startSearching();
-
+  const searchAPI = async function(value: string){
     try {
       const results = await Promise.all([
         fetchRequest('/search/movies/' + value),
         fetchRequest('/search/tv/' + value),
         fetchRequest('/search/person/' + value)
       ]);
-      searchStore.setMovies(results[0]);
-      searchStore.setTvshows(results[1]);
-      searchStore.setPeople(results[2]);
+      searchStore.setMovies(results[0].movies);
+      searchStore.setTvshows(results[1].tvshows);
+      searchStore.setPeople(results[2].people);
+
     } catch (error) {
       console.log(error);
     }
-
   }
 
   const searchContent = function(e: React.ChangeEvent<HTMLInputElement>){
-    searchStore.startSearching();
     const value = e.target.value;
-    setSearchValue(value);
+
+    searchStore.setSearchValue(value);
+    setInputValue(value);
+
+    if(value !== ''){
+      navigate('/search');
+    };
+
     clearTimeout(timerRef.current);
 
     timerRef.current = setTimeout(()=>{
+      clearSearchResults();
       searchAPI(value);
     }, 800);
   };
 
   const openSearch = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation();
-    setShowSearch(!showSearch);
+    setShowSearch(true);
   }
 
   const closeSearch = function(e: Event){
@@ -76,11 +76,11 @@ function Navbar() {
   }
 
   const cleanup = function(){
-    document.removeEventListener("click", closeSearch)
+    document.removeEventListener("mousedown", closeSearch)
   }
 
   useEffect(()=>{
-    document.addEventListener("click", closeSearch);
+    document.addEventListener("mousedown", closeSearch);
     return cleanup
   }, [])
 
@@ -96,7 +96,7 @@ function Navbar() {
             <Link to="/" >
               <img className="logo" src="/netflix-logo.png" alt="logo" />
             </Link>
-            <div className="header-desktop-menu mobile-hide">
+            <div className="header-desktop-menu mobile-hide" onClick={function(){setShowSearch(false); setInputValue('')}}>
               <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
               <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
               <Link className="hover-underline" to="/" onClick={function(){console.log('search history')}}>Search History</Link>
@@ -105,7 +105,7 @@ function Navbar() {
           <div className="flex center gap-3">
             {
               showSearch === true?
-              <input ref={inputRef} className="search-input" value={searchValue} onChange={function(e){searchContent(e)}}/>:
+              <input ref={inputRef} className="search-input" value={inputValue} onChange={function(e){searchContent(e)}}/>:
               <Search id="search-icon" className="hand-hover" onClick={function(e){openSearch(e)}}/>
             }
             <img src="/avatar1.png" className="hand-hover profile-image" />
@@ -115,7 +115,7 @@ function Navbar() {
         </div>
         {
           showMenu?
-            <div className="desktop-hide flex flex-col gap-2 mobile-menu ">
+            <div className="desktop-hide flex flex-col gap-2 mobile-menu" onClick={function(){setShowSearch(false); setInputValue('')}}>
             <Link to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
             <Link to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
             <Link to="/" onClick={function(){console.log('search history')}}>Search History</Link>
