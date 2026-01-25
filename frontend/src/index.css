@@ -275,16 +275,8 @@ body {
 /* SEARCH RESULTS ===============================================================================*/
 /* SEARCH RESULTS ===============================================================================*/
 
-.search-results-container {
-  border: 1px solid red;
-  max-width: 80vw;
-  margin: 100px auto;
-  gap: 10px;
-}
-
-.search-results-container img {
-  border-radius: 6px;
-  max-width: 300px;
+.search-page-container {
+  padding: 100px 0;
 }
 
 /* SLIDER ITEM ===============================================================================*/
