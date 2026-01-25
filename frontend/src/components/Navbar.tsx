@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/authUserStore";
 import { useContentTypeStore } from "../store/contentTypeStore";
 import { useSearchResultsStore } from "../store/searchResultsStore";
 import { fetchRequest } from "../utils/functions";
+import type { MovieType } from "../types";
 
 function Navbar() {
   const authStore = useAuthStore();
@@ -40,8 +41,14 @@ function Navbar() {
       ]);
       searchStore.setMovies(results[0].movies);
       searchStore.setTvshows(results[1].tvshows);
-      searchStore.setPeople(results[2].people);
-
+      const people = results[2].people;
+      if(people && people.length > 0){
+        if(people[0].known_for && people[0].known_for.length > 0){
+          people[0].known_for.forEach((movie: MovieType) => {
+            results[0].movies.push(movie);
+          });
+        }
+      };
     } catch (error) {
       console.log(error);
     }

@@ -92,8 +92,6 @@ function MovieSlider(props: MovieSliderProps) {
   useEffect(()=>{
     if(!props.ownData){
       grabData();
-    }else{
-      console.log('we are using our own data')
     }
   }, [contentTypeStore.contentType]);
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSearchResultsStore } from '../store/searchResultsStore';
@@ -23,7 +23,6 @@ function SearchResults() {
         <div className="flex flex-col gap-10 p-10 bg-black">
           <MovieSlider category='Movies' ownData={true} data={searchStore.movies} />
           <MovieSlider category='TV Shows' ownData={true} data={searchStore.tvshows} />
-          <MovieSlider category='People' ownData={true} peopleData={searchStore.people} />
         </div>
       </div>
     </div>
