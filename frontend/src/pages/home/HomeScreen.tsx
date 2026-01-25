@@ -66,7 +66,7 @@ function HomeScreen() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-10 p-10 bg-black">
+      <div className="flex flex-col gap-10 bg-black p-10">
         {
           contentTypeStore.contentType === 'movie'?
           movie_category.map((item)=>{
