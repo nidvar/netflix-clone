@@ -22,7 +22,8 @@ function SearchResults() {
         <h1 className='center'>Search Results</h1>
         <div className="flex flex-col gap-10 p-10 bg-black">
           <MovieSlider category='Movies' ownData={true} data={searchStore.movies} />
-          <MovieSlider category='TV Shows' ownData={true} data={searchStore.tvshows} />
+          <MovieSlider category='Shows' ownData={true} data={searchStore.tvshows} />
+          <p className='white center'>{searchStore.message}</p>
         </div>
       </div>
     </div>

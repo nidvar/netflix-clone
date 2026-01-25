@@ -7,12 +7,10 @@ import { useContentTypeStore } from "../store/contentTypeStore";
 
 import type { MovieSliderProps, DataObjectType, MovieType, PeopleType } from "../types";
 import { fetchRequest } from "../utils/functions";
-import { useSearchResultsStore } from "../store/searchResultsStore";
 
 function MovieSlider(props: MovieSliderProps) {
 
   const contentTypeStore = useContentTypeStore();
-  const searchStore = useSearchResultsStore();
 
   const [data, setData] = useState<DataObjectType[]>([]);
   const [showArrows, setShowArrows] = useState(false);
@@ -109,62 +107,67 @@ function MovieSlider(props: MovieSliderProps) {
   }, [props.data]);
 
   return (
-    <div className={
-      props.ownData?
-      "relative white watch-page-slider":"relative white"
-      }
-    >
-      <h1 className="white text-xl font-bold">{formatted}</h1>
-      <div
-        className="slider-container"
-        ref={sliderRef}
-        onMouseEnter={() => setShowArrows(true)}
-        onMouseLeave={() => setShowArrows(false)}
-      >
-        <div className="scroll-arrow-container group">
-          {
-            showArrows === true?
-            <>
-              <ChevronLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollLeft}/>
-            </>:''
+    <>
+      {
+        data.length > 0 ?
+          <div className={
+            props.ownData ?
+              "relative white watch-page-slider" : "relative white"
           }
-        </div>
-        {
-          data.length > 0?
-          data.map((item)=>{
-            if(item.backdropURL === null && item.posterURL === null){
-              return;
-            }
-            return (
-              <div 
-                className={
-                  props.ownData? 
-                  "hand-hover group flex flex-col gap-2 movie-slider-poster":
-                  "slider-item hand-hover group flex flex-col gap-2"
-                } 
-                key={item.id}
-              >
-                <img
-                  alt="Movie image"
-                  src={props.ownData? imageSrc + item.posterURL:  imageSrc + item.backdropURL}
-                  className={"transition-transform duration-300 ease-in-out group-hover:scale-105"}
-                  onClick={function(){navigate("/watch/" + item.id)}}
-                />
-                <p className="center">{item.title}</p>
+          >
+            <h1 className="white text-xl font-bold">{formatted}</h1>
+            <div
+              className="slider-container"
+              ref={sliderRef}
+              onMouseEnter={() => setShowArrows(true)}
+              onMouseLeave={() => setShowArrows(false)}
+            >
+              <div className="scroll-arrow-container group">
+                {
+                  showArrows === true ?
+                    <>
+                      <ChevronLeft size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollLeft} />
+                    </> : ''
+                }
               </div>
-            )
-          }):''
-        }
-      <div className="scroll-arrow-container right-chevron group">
-          {
-            showArrows === true?
-            <>
-              <ChevronRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollRight}/>
-            </>:''
-          }
-        </div>
-      </div>
-    </div>
+              {
+                data.length > 0 ?
+                  data.map((item) => {
+                    if (item.backdropURL === null && item.posterURL === null) {
+                      return;
+                    }
+                    return (
+                      <div
+                        className={
+                          props.ownData ?
+                            "hand-hover group flex flex-col gap-2 movie-slider-poster" :
+                            "slider-item hand-hover group flex flex-col gap-2"
+                        }
+                        key={item.id}
+                      >
+                        <img
+                          alt="Movie image"
+                          src={props.ownData ? imageSrc + item.posterURL : imageSrc + item.backdropURL}
+                          className={"transition-transform duration-300 ease-in-out group-hover:scale-105"}
+                          onClick={function () { navigate("/watch/" + item.id) }}
+                        />
+                        <p className="center">{item.title}</p>
+                      </div>
+                    )
+                  }) : ''
+              }
+              <div className="scroll-arrow-container right-chevron group">
+                {
+                  showArrows === true ?
+                    <>
+                      <ChevronRight size={cssPropertiesArrows.size} className={cssPropertiesArrows.className} strokeWidth={cssPropertiesArrows.className} onClick={scrollRight} />
+                    </> : ''
+                }
+              </div>
+            </div>
+          </div> : ''
+      }
+    </>
   )
 
 }

@@ -32,6 +32,7 @@ function Navbar() {
   }
 
   const searchAPI = async function(value: string){
+    searchStore.setMessage('');
     if(value === '' || value === null || value === undefined) return;
     try {
       const results = await Promise.all([
@@ -39,8 +40,14 @@ function Navbar() {
         fetchRequest('/search/tv/' + value),
         fetchRequest('/search/person/' + value)
       ]);
+
+      if(results[0].movies.length === 0 && results[1].tvshows.length === 0){
+        searchStore.setMessage('No results');
+      }
+
       searchStore.setMovies(results[0].movies);
       searchStore.setTvshows(results[1].tvshows);
+
       const people = results[2].people;
       if(people && people.length > 0){
         if(people[0].known_for && people[0].known_for.length > 0){
@@ -108,7 +115,7 @@ function Navbar() {
             </Link>
             <div className="header-desktop-menu mobile-hide" onClick={function(){setShowSearch(false); setInputValue('')}}>
               <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
-              <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
+              <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tv')}}>Shows</Link>
               <Link className="hover-underline" to="/" onClick={function(){console.log('search history')}}>Search History</Link>
             </div>
           </div>
@@ -127,7 +134,7 @@ function Navbar() {
           showMenu?
             <div className="desktop-hide flex flex-col gap-2 mobile-menu" onClick={function(){setShowSearch(false); setInputValue('')}}>
             <Link to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
-            <Link to="/" onClick={function(){contentType.setContentType('tv')}}>Tv Shows</Link>
+            <Link to="/" onClick={function(){contentType.setContentType('tv')}}>Shows</Link>
             <Link to="/" onClick={function(){console.log('search history')}}>Search History</Link>
           </div>:
           <></>
