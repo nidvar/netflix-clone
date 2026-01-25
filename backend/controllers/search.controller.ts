@@ -1,22 +1,8 @@
 import type { Request, Response } from 'express';
 import { fetchData } from '../services/tmdb.service.js';
+import { addSearchHistory } from '../utils/addSearchHistory.js';
 
 import pool from '../db.js';
-
-const handleDBDuplicates = async function(userId: string, query: string) {
-    const result = await pool.query(
-        'SELECT user_id, title FROM history WHERE user_id = $1 AND title = $2',
-        [userId, query]
-    );
-    const existingUser = result.rows[0];
-    if(!existingUser) {
-        await pool.query(
-            `INSERT INTO history (user_id, title) VALUES ($1, $2)
-            ON CONFLICT (user_id, title) DO NOTHING`,
-            [userId, query]
-        );
-    }
-}
 
 export const searchPerson = async (req: Request, res: Response)=>{
     const query = req.params.query || '';
@@ -24,7 +10,7 @@ export const searchPerson = async (req: Request, res: Response)=>{
         const data = await fetchData(`https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`);
         const people = data.results;
 
-        await handleDBDuplicates(res.locals.userId, query);
+        await addSearchHistory(res.locals.userId, query);
 
         return res.status(200).json({people: people});
     } catch (error) {
@@ -39,7 +25,7 @@ export const searchMovie = async (req: Request, res: Response)=>{
         const data = await fetchData(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`);
         const movies = data.results;
 
-        await handleDBDuplicates(res.locals.userId, query);
+        await addSearchHistory(res.locals.userId, query);
 
         return res.status(200).json({movies: movies});
     } catch (error) {
@@ -54,7 +40,7 @@ export const searchTVShow = async (req: Request, res: Response)=>{
         const data = await fetchData(`https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`);
         const tvshows = data.results;
 
-        await handleDBDuplicates(res.locals.userId, query);
+        await addSearchHistory(res.locals.userId, query);
 
         return res.status(200).json({tvshows: tvshows});
     } catch (error) {
