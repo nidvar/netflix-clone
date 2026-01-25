@@ -1,17 +1,18 @@
 import { create } from "zustand";
 
-import type { SearchResultType, SearchStoreType } from "../types";
+import type { MovieType, PeopleType, SearchStoreType } from "../types";
 
 export const useSearchResultsStore = create<SearchStoreType>((set)=>{
   return {
-    searching: false,
+    searchValue: '',
+    message: '',
     movies: [],
     tvshows: [],
     people: [],
-    setMovies: (results: SearchResultType[]) => set({ movies: results }),
-    setTvshows: (results: SearchResultType[]) => set({ tvshows: results }),
-    setPeople: (results: SearchResultType[]) => set({ people: results }),
-    startSearching: () => set({ searching: true }),
-    stopSearching: () => set({ searching: false }),
+    setMovies: (results: MovieType[]) => set({ movies: results }),
+    setTvshows: (results: MovieType[]) => set({ tvshows: results }),
+    setPeople: (results: PeopleType[]) => set({ people: results }),
+    setSearchValue: (value: string) => set({ searchValue: value }),
+    setMessage: (message: string) => set({ message: message }),
   }
 })

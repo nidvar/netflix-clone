@@ -275,9 +275,7 @@ body {
 /* SEARCH RESULTS ===============================================================================*/
 /* SEARCH RESULTS ===============================================================================*/
 
-.search-results-container {
-  border: 1px solid red;
-  max-width: 80vw;
+.search-page-container {
   margin: 100px auto;
   gap: 10px;
 }

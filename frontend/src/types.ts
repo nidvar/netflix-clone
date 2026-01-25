@@ -14,20 +14,29 @@ export type ContentTypeStore = {
 }
 
 export type SearchStoreType = {
-  searching: boolean;
-  movies: SearchResultType[];
-  tvshows: SearchResultType[];
-  people: SearchResultType[];
-  setMovies: (results: SearchResultType[]) => void;
-  setTvshows: (results: SearchResultType[]) => void;
-  setPeople: (results: SearchResultType[]) => void;
-  startSearching: () => void;
-  stopSearching: () => void;
+  searchValue: string;
+  message: string;
+  movies: MovieType[];
+  tvshows: MovieType[];
+  people: PeopleType[];
+  setMovies: (results: MovieType[]) => void;
+  setTvshows: (results: MovieType[]) => void;
+  setPeople: (results: PeopleType[]) => void;
+  setSearchValue: (value: string) => void;
+  setMessage: (message: string) => void;
+}
+
+export type DataObjectType = {
+  backdropURL?: string
+  posterURL?: string
+  title: string
+  id: number
 }
 
 export type MovieSliderProps = {
   category: string
   ownData?: boolean
+  peopleData?: PeopleType[]
   data?: MovieType[]
 }
 
