@@ -19,19 +19,6 @@ export const searchPerson = async (req: Request, res: Response)=>{
     }
 }
 
-export const searchPersonById = async (req: Request, res: Response)=>{
-    const id = req.params.id || '';
-    try {
-        const data = await fetchData(`https://api.themoviedb.org/3/person/${id}?language=en-US`);
-        const people = data.results;
-        
-        return res.status(200).json({people: people});
-    } catch (error) {
-        console.log(error);
-        return res.status(401).json({message: 'search movie error'});
-    }
-}
-
 export const searchMovie = async (req: Request, res: Response)=>{
     const query = req.params.query || '';
     try {
