@@ -81,6 +81,7 @@ function Navbar() {
   const closeSearch = function(e: Event){
     if(searchRef.current && !searchRef.current.contains(e.target as Node)){
       setShowSearch(false);
+      setInputValue('');
     }
   }
 
