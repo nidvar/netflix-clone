@@ -31,6 +31,7 @@ function Navbar() {
   }
 
   const searchAPI = async function(value: string){
+    if(value === '' || value === null || value === undefined) return;
     try {
       const results = await Promise.all([
         fetchRequest('/search/movies/' + value),
@@ -48,13 +49,14 @@ function Navbar() {
 
   const searchContent = function(e: React.ChangeEvent<HTMLInputElement>){
     const value = e.target.value;
-
     searchStore.setSearchValue(value);
     setInputValue(value);
 
     if(value !== ''){
       navigate('/search');
-    };
+    }else{
+      navigate('/');
+    }
 
     clearTimeout(timerRef.current);
 
