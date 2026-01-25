@@ -3,21 +3,28 @@ import { fetchData } from '../services/tmdb.service.js';
 
 import pool from '../db.js';
 
+const handleDBDuplicates = async function(userId: string, query: string) {
+    const result = await pool.query(
+        'SELECT user_id, title FROM history WHERE user_id = $1 AND title = $2',
+        [userId, query]
+    );
+    const existingUser = result.rows[0];
+    if(!existingUser) {
+        await pool.query(
+            `INSERT INTO history (user_id, title) VALUES ($1, $2)
+            ON CONFLICT (user_id, title) DO NOTHING`,
+            [userId, query]
+        );
+    }
+}
+
 export const searchPerson = async (req: Request, res: Response)=>{
-    const query = req.params.query;
+    const query = req.params.query || '';
     try {
         const data = await fetchData(`https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`);
         const people = data.results;
 
-        await pool.query(
-            'INSERT INTO history (user_id, image, title, search_type) VALUES ($1, $2, $3, $4)', 
-            [
-                res.locals.userId, 
-                data.results[0].profile_path, 
-                data.results[0].name, 
-                'person'
-            ]
-        );
+        await handleDBDuplicates(res.locals.userId, query);
 
         return res.status(200).json({people: people});
     } catch (error) {
@@ -27,20 +34,12 @@ export const searchPerson = async (req: Request, res: Response)=>{
 }
 
 export const searchMovie = async (req: Request, res: Response)=>{
-    const query = req.params.query;
+    const query = req.params.query || '';
     try {
         const data = await fetchData(`https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`);
         const movies = data.results;
 
-        await pool.query(
-            'INSERT INTO history (user_id, image, title, search_type) VALUES ($1, $2, $3, $4)',
-            [
-                res.locals.userId, 
-                data.results[0].poster_path, 
-                data.results[0].title, 
-                'movie'
-            ]
-        );
+        await handleDBDuplicates(res.locals.userId, query);
 
         return res.status(200).json({movies: movies});
     } catch (error) {
@@ -50,20 +49,12 @@ export const searchMovie = async (req: Request, res: Response)=>{
 }
 
 export const searchTVShow = async (req: Request, res: Response)=>{
-    const query = req.params.query;
+    const query = req.params.query || '';
     try {
         const data = await fetchData(`https://api.themoviedb.org/3/search/tv?query=${query}&include_adult=false&language=en-US&page=1`);
         const tvshows = data.results;
 
-        await pool.query(
-            'INSERT INTO history (user_id, image, title, search_type) VALUES ($1, $2, $3, $4)',
-            [
-                res.locals.userId, 
-                data.results[0].poster_path, 
-                data.results[0].name, 
-                'tvshow'
-            ]
-        );
+        await handleDBDuplicates(res.locals.userId, query);
 
         return res.status(200).json({tvshows: tvshows});
     } catch (error) {
