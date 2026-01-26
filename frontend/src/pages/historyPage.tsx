@@ -68,7 +68,7 @@ function historyPage() {
   return (
     <div className="bg-black white pt-1">
       <div className='search-page-container min-h-screen'>
-        <h1 className='center text-xl font-bold'>Search History</h1>
+        <h1 className='center text-xl font-bold search-title'>Search History</h1>
         <div className="flex flex-col gap-10 p-10 bg-black max-width-70vw">
           {
             history.length > 0?
