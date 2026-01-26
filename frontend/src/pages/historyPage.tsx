@@ -25,6 +25,7 @@ function historyPage() {
   }
 
   const searchAPI = async function(value: string){
+    searchStore.setMessage('');
     try {
       const results = await Promise.all([
         fetchRequest('/search/movies/' + value),
@@ -67,8 +68,8 @@ function historyPage() {
   return (
     <div className="bg-black white pt-1">
       <div className='search-page-container min-h-screen'>
-        <h1 className='center'>Search History</h1>
-        <div className="flex flex-col gap-10 p-10 bg-black">
+        <h1 className='center text-xl font-bold'>Search History</h1>
+        <div className="flex flex-col gap-10 p-10 bg-black max-width-70vw">
           {
             history.length > 0?
             history.map((item: HistoryItem, index)=>{
