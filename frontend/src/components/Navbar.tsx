@@ -116,7 +116,7 @@ function Navbar() {
             <div className="header-desktop-menu mobile-hide" onClick={function(){setShowSearch(false); setInputValue('')}}>
               <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
               <Link className="hover-underline" to="/" onClick={function(){contentType.setContentType('tv')}}>Shows</Link>
-              <Link className="hover-underline" to="/" onClick={function(){console.log('search history')}}>Search History</Link>
+              <Link className="hover-underline" to="/history" onClick={function(){console.log('search history')}}>Search History</Link>
             </div>
           </div>
           <div className="flex center gap-3">
@@ -135,7 +135,7 @@ function Navbar() {
             <div className="desktop-hide flex flex-col gap-2 mobile-menu" onClick={function(){setShowSearch(false); setInputValue('')}}>
             <Link to="/" onClick={function(){contentType.setContentType('movie')}}>Movies</Link>
             <Link to="/" onClick={function(){contentType.setContentType('tv')}}>Shows</Link>
-            <Link to="/" onClick={function(){console.log('search history')}}>Search History</Link>
+            <Link to="/history" onClick={function(){console.log('search history')}}>Search History</Link>
           </div>:
           <></>
         }

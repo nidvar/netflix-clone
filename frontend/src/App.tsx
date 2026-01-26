@@ -11,6 +11,7 @@ import HomeScreen from './pages/home/HomeScreen'
 import AuthScreen from './pages/home/AuthScreen'
 import SearchResultsPage from './pages/SearchResultsPage'
 import Navbar from './components/Navbar'
+import HistoryPage from './pages/historyPage'
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
               <Route path='/login' element={!signedIn?<LoginPage />: <Navigate to="/" />} />
               <Route path='/signup' element={!signedIn?<SignUpPage />: <Navigate to="/" />} />
               <Route path='/watch/:id' element={signedIn?<WatchPage />: <Navigate to="/login" />} />
+              <Route path='/history' element={signedIn?<HistoryPage />: <Navigate to="/login" />} />
               <Route path='/search' element={signedIn?<SearchResultsPage />: <Navigate to="/login" />} />
               <Route path='*' element={signedIn? <HomeScreen />: <AuthScreen />} />
             </Routes>

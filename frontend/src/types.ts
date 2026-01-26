@@ -1,29 +1,29 @@
 export type AuthStore = {
-  user: string | null;
-  isLoading: boolean;
-  signedIn: boolean;
-  login: (email: string, password: string)=> Promise<string>;
-  signUp: (email: string, username: string, password: string)=> Promise<string>;
-  logout: ()=> Promise<void>;
-  checkAuth: ()=> Promise<void>;
+  user: string | null
+  isLoading: boolean
+  signedIn: boolean
+  login: (email: string, password: string)=> Promise<string>
+  signUp: (email: string, username: string, password: string)=> Promise<string>
+  logout: ()=> Promise<void>
+  checkAuth: ()=> Promise<void>
 }
 
 export type ContentTypeStore = {
-  contentType: string | null;
-  setContentType: (contentType: string)=> void;
+  contentType: string | null
+  setContentType: (contentType: string)=> void
 }
 
 export type SearchStoreType = {
-  searchValue: string;
-  message: string;
-  movies: MovieType[];
-  tvshows: MovieType[];
-  people: PeopleType[];
-  setMovies: (results: MovieType[]) => void;
-  setTvshows: (results: MovieType[]) => void;
-  setPeople: (results: PeopleType[]) => void;
-  setSearchValue: (value: string) => void;
-  setMessage: (message: string) => void;
+  searchValue: string
+  message: string
+  movies: MovieType[]
+  tvshows: MovieType[]
+  people: PeopleType[]
+  setMovies: (results: MovieType[]) => void
+  setTvshows: (results: MovieType[]) => void
+  setPeople: (results: PeopleType[]) => void
+  setSearchValue: (value: string) => void
+  setMessage: (message: string) => void
 }
 
 export type DataObjectType = {
@@ -56,19 +56,19 @@ export type MovieType = {
   poster_path: string
   release_date: string
   title?: string
-  video: boolean,
+  video: boolean
   name?:string
 }
 
 export type PeopleType = {
-  adult: boolean,
-  gender: number,
-  id: number,
-  known_for_department: string,
-  name: string,
-  original_name: string,
-  popularity: number,
-  profile_path: string | null,
+  adult: boolean
+  gender: number
+  id: number
+  known_for_department: string
+  name: string
+  original_name: string
+  popularity: number
+  profile_path: string | null
   known_for: MovieType[]
 }
 
@@ -79,7 +79,7 @@ export type Trailer = {
   key: string
   site: number
   type: string
-  official: boolean,
+  official: boolean
   published_at: string
   id: number
 }
@@ -88,4 +88,13 @@ export type Body = {
   email: string
   password: string
   username?: string
+}
+
+export type HistoryItem = {
+  id: number
+  user_id: number
+  image: string
+  title: string
+  search_type: string
+  created_at: Date
 }
