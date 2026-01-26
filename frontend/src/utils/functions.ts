@@ -31,3 +31,32 @@ export const fetchPostRequest = async (url: string, body?: Body)=>{
     console.log(error, url);
   }
 }
+
+export const fetchDeleteRequest = async (url: string)=>{
+  const payload = {
+    method: 'DELETE',
+    credentials: "include" as RequestCredentials
+  }
+  try {
+    const response = await fetch(import.meta.env.VITE_BACKEND_API + url, payload);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error, url);
+  }
+}
+
+export const readableDate = function (input?: string | Date): string {
+    if (!input) return "unknown date"; // handles undefined/null
+
+    const date = new Date(input);
+    if (isNaN(date.getTime())) return "invalid date"; // handles bad input
+
+    const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+    };
+
+    return date.toLocaleDateString(undefined, options);
+}

@@ -9,7 +9,7 @@ searchRouter.get('/tv/:query', searchTVShow);
 searchRouter.get('/person/:query', searchPerson);
 searchRouter.get('/history', getSearchHistory);
 
-searchRouter.delete('/removesearchitem', removeFromHistory);
+searchRouter.delete('/removesearchitem/:id', removeFromHistory);
 searchRouter.delete('/clearsearch', clearHistory);
 
 export default searchRouter;

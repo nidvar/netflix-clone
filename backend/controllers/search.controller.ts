@@ -75,7 +75,7 @@ export const clearHistory = async (req: Request, res: Response)=>{
 
 export const removeFromHistory = async (req: Request, res: Response)=>{
     try {
-        const id = req.body.id;
+        const id = req.params.id;
         await pool.query(
             'DELETE FROM history WHERE id = $1 AND user_id = $2',
             [id, res.locals.userId]

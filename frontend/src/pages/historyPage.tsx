@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useSearchResultsStore } from "../store/searchResultsStore";
-import { fetchRequest } from "../utils/functions";
+import { fetchDeleteRequest, fetchRequest, readableDate } from "../utils/functions";
 import type { HistoryItem, MovieType } from '../types';
 import { Link } from 'react-router-dom';
+import { Trash } from 'lucide-react';
 
 function historyPage() {
 
@@ -61,6 +62,16 @@ function historyPage() {
     navigate('/search');
   }
 
+  const deleteHistoryItem = async function(id: number){
+    await fetchDeleteRequest('/search/removesearchitem/' + id);
+    grabHistory();
+  }
+
+  const deleteEntireHistory = async function(){
+    await fetchDeleteRequest('/search/clearsearch');
+    grabHistory();
+  }
+
   useEffect(()=>{
     grabHistory();
   }, []);
@@ -69,15 +80,23 @@ function historyPage() {
     <div className="bg-black white pt-1">
       <div className='search-page-container min-h-screen'>
         <h1 className='center text-xl font-bold search-title'>Search History</h1>
-        <div className="flex flex-col gap-10 p-10 bg-black max-width-70vw">
+        
+        { history.length > 0?
+          <div className='flex max-width-70vw py-5'>
+            <p className='hand-hover' onClick={function(){deleteEntireHistory()}}>DELETE SEARCH HISTORY</p>
+            <Trash className='ml-4'/>
+          </div>:null
+        }
+        <div className="flex flex-col gap-4 bg-black max-width-70vw">
           {
             history.length > 0?
             history.map((item: HistoryItem, index)=>{
               return (
-                <div key={index}>
+                <div key={index} className='flex justify-between'>
                   <Link to="" onClick={function(e){e.preventDefault(); goToSearchPage(item.title)}} >
-                    <p key={index}>{item.title}</p>
+                    <p key={index}>{item.title} - {readableDate(item.created_at)}</p>
                   </Link>
+                  <Trash className='hand-hover' onClick={function(){deleteHistoryItem(item.id)}}/>
                 </div>
               )
             }):null
