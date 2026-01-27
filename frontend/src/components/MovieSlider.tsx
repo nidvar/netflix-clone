@@ -115,7 +115,7 @@ function MovieSlider(props: MovieSliderProps) {
               "relative white watch-page-slider" : "relative white"
           }
           >
-            <h1 className="white text-xl font-bold">{formatted}</h1>
+            <h1 className="white text-xl font-bold movie-slider-title">{formatted}</h1>
             <div
               className="slider-container"
               ref={sliderRef}
@@ -141,7 +141,7 @@ function MovieSlider(props: MovieSliderProps) {
                         className={
                           props.ownData ?
                             "hand-hover group flex flex-col gap-2 movie-slider-poster" :
-                            "slider-item hand-hover group flex flex-col gap-2"
+                            "hand-hover group flex flex-col gap-2 slider-item "
                         }
                         key={item.id}
                       >

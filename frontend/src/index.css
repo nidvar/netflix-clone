@@ -468,6 +468,19 @@ body {
     font-weight: bolder;
   }
 
+  .slider-item img {
+    border-radius: 8px;
+    max-width: 200px;
+  }
+
+  .slider-item {
+    min-width: 180px;
+  }
+
+  .movie-slider-title {
+    text-align: center;
+  }
+
   .max-width-medium {
     max-width: 80vw;
     width: 100%;
