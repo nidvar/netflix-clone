@@ -11,7 +11,6 @@ function AuthScreen() {
 
   const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(email);
     navigate("/signup?email=" + email)
   };
 

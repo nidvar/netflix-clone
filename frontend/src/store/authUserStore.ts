@@ -49,7 +49,6 @@ export const useAuthStore = create<AuthStore>((set) => {
         return;
       } else {
         const res = await fetchPostRequest('/auth/refreshtoken');
-        console.log(res.message);
         if (res.message === 'access token refreshed') {
           set({ signedIn: true });
           window.location.reload();
