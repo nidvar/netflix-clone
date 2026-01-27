@@ -28,32 +28,24 @@ app.use(
   })
 );
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-app.get("/", async (req, res) => {
-  try {
-    console.log("Checking database connection...");
-    const result = await pool.query("SELECT NOW()");
-    return res.status(200).json({ dbTime: result.rows[0], message: "Database connected successfully" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Database connection failed" });
-  }
+app.get("/api/health", async (req, res) => {
+  const result = await pool.query("SELECT NOW()");
+  res.json({ dbTime: result.rows[0] });
 });
 
 app.use("/api/auth", authRouter);
 app.use("/api/movies", protectRoute, movieRouter);
 app.use("/api/search", protectRoute, searchRouter);
 
-if(process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, 'frontend/dist')));
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
-  })
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "frontend", "dist")));
+  app.use((req, res) => {
+    res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+  });
 }
 
 app.listen(PORT, () => {

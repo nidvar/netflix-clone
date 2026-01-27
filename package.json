@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development tsx watch backend/server.ts",
-    "start": "NODE_ENV=production tsx backend/server.ts",
+    "start": "tsx backend/server.ts",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],
