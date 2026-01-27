@@ -187,3 +187,25 @@ export const authCheck = async (req: Request, res: Response)=>{
         return res.status(401).json({message: 'authCheck error, or invalid token'});
     }
 }
+
+export const getProfile = async (req: Request, res: Response)=>{
+    try {
+        const result = await pool.query(
+            'SELECT * FROM users WHERE id = $1', 
+            [res.locals.userId]
+        );
+        const user = result.rows[0];
+        if(!user){
+            return res.status(404).json({ message: 'User not found' });
+        }
+        const profile = {
+            username: user.username,
+            email: user.email,
+            created_at: user.created_at
+        }
+        return res.status(200).json({user: profile});
+    } catch (error) {
+        console.error('Error in grabUserData controller:', error);
+        return res.status(500).json({ message: 'Internal server error' });
+    }
+}

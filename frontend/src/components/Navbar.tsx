@@ -125,7 +125,7 @@ function Navbar() {
               <input ref={inputRef} className="search-input" value={inputValue} onChange={function(e){searchContent(e)}}/>:
               <Search id="search-icon" className="hand-hover" onClick={function(e){openSearch(e)}}/>
             }
-            <img src="/avatar1.png" className="hand-hover profile-image" />
+            <Link to='/profile'><img src="/avatar1.png" className="hand-hover profile-image" /></Link>
             <LogOut className="hand-hover" onClick={function(){authStore.logout()}}/>
             <Menu className="hand-hover desktop-hide" onClick={function(){setShowMenu(!showMenu)}} />
           </div>

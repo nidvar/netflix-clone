@@ -7,7 +7,7 @@ import type { HistoryItem, MovieType } from '../types';
 import { Link } from 'react-router-dom';
 import { Trash } from 'lucide-react';
 
-function historyPage() {
+function HistoryPage() {
 
   const searchStore = useSearchResultsStore();
   const navigate = useNavigate();
@@ -107,4 +107,4 @@ function historyPage() {
   )
 }
 
-export default historyPage
+export default HistoryPage
