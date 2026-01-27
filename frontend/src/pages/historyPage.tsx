@@ -78,16 +78,16 @@ function HistoryPage() {
 
   return (
     <div className="bg-black white pt-1">
-      <div className='search-page-container min-h-screen'>
+      <div className='search-page-container min-h-screen max-width-medium'>
         <h1 className='center text-xl font-bold search-title'>Search History</h1>
         
         { history.length > 0?
-          <div className='flex max-width-70vw py-5'>
+          <div className='flex py-5'>
             <p className='hand-hover' onClick={function(){deleteEntireHistory()}}>DELETE SEARCH HISTORY</p>
             <Trash className='ml-4'/>
           </div>:null
         }
-        <div className="flex flex-col gap-4 bg-black max-width-70vw">
+        <div className="flex flex-col gap-4 bg-black ">
           {
             history.length > 0?
             history.map((item: HistoryItem, index)=>{
