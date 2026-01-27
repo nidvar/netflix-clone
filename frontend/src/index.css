@@ -296,6 +296,7 @@ body {
 
 .slider-item img {
   border-radius: 8px;
+  max-height:160px;
 }
 
 .scroll-arrow-container {
